@@ -1,5 +1,5 @@
 # Shopping-Application-React
-DS Assignment 2 - FrontEnd
+## DS Assignment 2 - FrontEnd
 
 ## Git Guide  
 
