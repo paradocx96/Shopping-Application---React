@@ -1,2 +1,2 @@
 # Shopping-Application-React
-DS Assignment 2
+DS Assignment 2 - FrontEnd
