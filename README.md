@@ -1,2 +1,2 @@
-# Shopping-Application---React
+# Shopping-Application-React
 DS Assignment 2
