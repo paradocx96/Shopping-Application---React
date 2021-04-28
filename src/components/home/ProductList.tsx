@@ -19,7 +19,7 @@ const ProductList: React.FC = () => {
     const renderSelectedProducts = () => {
         return (
             products.map((product: IProduct, index: number) =>
-                (product.cType.trim().toLowerCase() == selectedCategory.trim().toLowerCase()) &&
+                (product.cType.trim().toLowerCase() === selectedCategory.trim().toLowerCase()) &&
                 <Product key={index} product={product}/>)
         );
     }
