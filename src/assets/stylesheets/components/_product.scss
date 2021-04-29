@@ -2,16 +2,16 @@
 @import "../common/variables";
 
 .product-list {
-  background-color: var(--background-primary-color);
+  //background-color: var(--background-primary-color);
 }
 
 .product {
+  text-align: center;
   background-color: var(--background-primary-color);
   font-size: 1em;
-  border-radius: 5px;
-  @if ($isBorderRadius) {
-    border-radius: 0;
-  }
+  border: 1px solid var(--border-primary-color);
+  color: var(--text-primary-color);
+
 
   .product-image {
     width: 80%;
@@ -62,15 +62,22 @@
     font-weight: 500;
     border-radius: 8px;
     margin-bottom: 0.4em;
-    @if ($isBorderRadius) {
-      border-radius: 0;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+
+    &:hover {
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      transform: translateY(0.1em);
     }
   }
 
   .add-to-card {
+    background-color: var(--button-primary-bg-color);
+    color: var(--button-primary-text-color);
+    border-color: var(--button-primary-bg-color);
     @extend .cart-button;
 
     &:hover {
+      background-color: var(--button-primary-bg-hover-color);
     }
   }
 

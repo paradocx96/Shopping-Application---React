@@ -29,8 +29,6 @@ const DarkModeToggleDiv: React.FC = () => {
             checked={isDark}
             size={80}
         />
-        // <button onClick={handleOnThemeChange}>Theme</button>
     )
-
 }
 export default DarkModeToggleDiv;

@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import ProductList from "./components/home/ProductList";
 import './assets/stylesheets/main.scss'
-import DarkModeToggle from "./components/DarkModeToggle";
+import DarkModeToggle from "./components/DarkModeToggleDiv";
 
 function App() {
     return (

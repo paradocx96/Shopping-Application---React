@@ -41,7 +41,7 @@ const Product: React.FC<ProductProps> = (props) => {
         <Col xs={6} sm={4} lg={3} className="p-0" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
             <div className="product px-2 px-md-2 px-lg-3 pt-1 pb-3 pb-md-4 m-1 m-md-2">
 
-                <Row className="m-0 negation">
+                <Row className="m-0">
                     <Col><Card.Img variant="top" className="product-image mt-2" src={product.image}/></Col>
                 </Row>
                 <Row className="m-0">
@@ -50,7 +50,7 @@ const Product: React.FC<ProductProps> = (props) => {
 
                 {product.price !== null && (
                     <Row className="m-0 pb-1 pb-md-3">
-                        <Col xs={7} sm={7} className="px-0 selling-price negation">
+                        <Col xs={7} sm={7} className="px-0 selling-price">
                             <NumberFormat displayType={'text'} thousandSeparator={true} className="float-left"
                                           prefix={'Rs. '} value={product.sellPrice.toFixed(2)}
                             />
@@ -66,7 +66,7 @@ const Product: React.FC<ProductProps> = (props) => {
                 }
                 {product.price === null &&
                 <Row className="m-0 pb-1 pb-md-3">
-                    <Col className="selling-price negation">
+                    <Col className="selling-price">
                         <NumberFormat displayType={'text'} thousandSeparator={true} prefix={'Rs. '}
                                       value={product.sellPrice.toFixed(2)}/>
                     </Col>
@@ -84,13 +84,11 @@ const Product: React.FC<ProductProps> = (props) => {
                         <Col xs={7} className="px-0">
                             {
                                 (cartedItem !== undefined) &&
-                                <Button variant="outline-primary"
-                                        onClick={onHandelUpdate}
-                                        className='update-card negation'>Update</Button>
+                                <Button variant="outline-primary" onClick={onHandelUpdate}
+                                        className='update-card'>Update</Button>
                             }{
                             (cartedItem === undefined) &&
-                            <Button variant="success" type="submit" className='add-to-card negation'>Add To
-                                Cart</Button>
+                            <Button type="submit" className='add-to-card'>Add To Cart</Button>
                         }
                         </Col>
                     </Row>

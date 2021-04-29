@@ -1,8 +1,11 @@
 :root{
   --text-primary-color: #1a1818;
   --text-primary-color-hover: black;
-  --background-primary-color: red;
-  //--background-primary-color: #d5e9f8;
+  --background-primary-color: #d5e9f8;
+  --button-primary-bg-color: #025b02;
+  --button-primary-bg-hover-color: #044304;
+  --button-primary-text-color: #fff;
+  --border-primary-color:gray;
 }
 
 
@@ -10,4 +13,8 @@
   --text-primary-color: #c3bebe;
   --text-primary-color-hover: white;
   --background-primary-color: #1a0d30;
+  --button-primary-bg-color: #25a925;
+  --button-primary-bg-hover-color: #168616;
+  --button-primary-text-color: #fff;
+  --border-primary-color:gray;
 }
