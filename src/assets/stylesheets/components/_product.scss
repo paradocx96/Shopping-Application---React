@@ -1,14 +1,14 @@
 @import "../common/colors";
+@import "../common/variables";
 
 .product-list {
-  background-color: map-get($theme, background-color);
+  background-color: var(--background-primary-color);
 }
 
 .product {
+  background-color: var(--background-primary-color);
   font-size: 1em;
   border-radius: 5px;
-  border: map-get($theme, border-color) 1.5px solid;
-  background-color: map-get($theme, background-color);
   @if ($isBorderRadius) {
     border-radius: 0;
   }
@@ -20,12 +20,10 @@
   .title {
     font-size: 1.2em;
     font-weight: 700;
-    color: map-get($theme, dark-font-color);
   }
 
   .selling-price {
     font-size: 1.1em;
-    color: map-get($theme, green-color);
     font-weight: 700;
     float: left;
   }
@@ -33,7 +31,6 @@
   .cut-price {
     float: right;
     font-size: 0.85em;
-    color: map-get($theme, gray-font-color);
     display: inline-block;
     position: relative;
 
@@ -72,10 +69,8 @@
 
   .add-to-card {
     @extend .cart-button;
-    background-color: map-get($theme, green-color);
 
     &:hover {
-      background-color: map-get($theme, green-hover-color);
     }
   }
 
