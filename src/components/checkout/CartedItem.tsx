@@ -15,20 +15,34 @@ const CartedItem: React.FC<CartedItemProps> = (props) => {
     const [qty, setQty] = useState<number>(cartedItem.cQty);
     let quantity: number;
     const dispatch = useDispatch();
-    const onHandelRemove=() =>dispatch(removeFromCart(cartedItem.product))
 
+    /**
+     * Remove the product from the redux store cart.
+     */
+    const onHandelRemove = () => dispatch(removeFromCart(cartedItem.product));
+
+    /**
+     * Increase the carted quantity in redux store.
+     */
     const increaseQty = () => {
         qty === cartedItem.product.stockQty ? quantity = qty : quantity = qty + 1
         changeCartedCountOfProduct(quantity)
     }
 
+    /**
+     * Decrease the carted quantity in redux store.
+     */
     const decreaseQty = () => {
         qty === 1 ? quantity = 1 : quantity = qty - 1
         changeCartedCountOfProduct(quantity);
     }
 
-    const changeCartedCountOfProduct=(quantity:number) =>{
-        dispatch(changeCartedCount({product:cartedItem.product, cQty:quantity}))
+    /**
+     * Change the carted quantity in redux store.
+     * @param quantity
+     */
+    const changeCartedCountOfProduct = (quantity: number) => {
+        dispatch(changeCartedCount({product: cartedItem.product, cQty: quantity}))
     }
 
     useEffect(() => {

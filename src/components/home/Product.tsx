@@ -25,12 +25,20 @@ const Product: React.FC<ProductProps> = (props) => {
         }, [cartedItems]
     )
 
+    /**
+     * Change the count of the carted item in redux store.
+     * @param event
+     */
     const onHandelUpdate = (event: FormEvent) => {
         event.preventDefault();
         event.stopPropagation();
         dispatch(changeCartedCount({product: product, cQty: qty}))
     }
 
+    /**
+     * Add product into redux store cart.
+     * @param event
+     */
     const onHandelAddToCart = (event: FormEvent) => {
         event.preventDefault();
         event.stopPropagation();

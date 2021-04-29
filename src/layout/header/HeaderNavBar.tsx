@@ -1,9 +1,6 @@
-import React, {useEffect} from 'react';
-import {Button, Nav, Navbar} from "react-bootstrap";
-import {Link, useHistory} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../store/reducers";
-import {setDarkTheme} from "../../store/actions/CommonStoreActions";
+import React from 'react';
+import {Nav, Navbar} from "react-bootstrap";
+import {Link} from "react-router-dom";
 import DarkModeToggleDiv from "../../components/DarkModeToggleDiv";
 import {CONTACT_NUMBER} from "../../constants/contact";
 
@@ -12,26 +9,6 @@ import {CONTACT_NUMBER} from "../../constants/contact";
  * @constructor
  */
 const HeaderNavBar: React.FC = () => {
-    const history = useHistory();
-    const onClickRegister = () => history.push('/register')
-    const isDark: boolean = useSelector((state: RootState) => state.onlineStoreReducer.isDarkTheme);
-
-    useEffect(() => {
-        if (isDark) {
-            document.documentElement.classList.add('dark-mode');
-            return
-        }
-        document.documentElement.classList.remove('dark-mode');
-    }, [isDark])
-
-    const dispatch = useDispatch();
-    const handleOnThemeChange = () => {
-        if (isDark) {
-            dispatch(setDarkTheme(false));
-        } else {
-            dispatch(setDarkTheme(true));
-        }
-    }
 
     return (
         <React.Fragment>
@@ -51,8 +28,11 @@ const HeaderNavBar: React.FC = () => {
                             className="feather-phone-call"/>
                             {CONTACT_NUMBER}</a>
                         <Link className="login px-2 negation" to="/login">Login</Link>
+                        <p className='text-center'>
+                            <DarkModeToggleDiv/>
+                        </p>
 
-                        <DarkModeToggleDiv/>
+
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

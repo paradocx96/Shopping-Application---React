@@ -5,11 +5,11 @@ import ProductList from "../components/home/ProductList";
 
 const Home: React.FC = () => {
     return (
-            <div className="background-color-1">
-                <Welcome/>
-                <SearchBar/>
-                <ProductList/>
-            </div>
+        <div className="background-color-1">
+            <Welcome/>
+            <SearchBar/>
+            <ProductList/>
+        </div>
     )
 }
 export default Home;

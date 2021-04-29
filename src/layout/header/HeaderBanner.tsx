@@ -20,7 +20,7 @@ const HeaderBanner: React.FC = () => {
         history.push('/checkout')
     }
 
-    const cartedItems: ICartedItem[] = useSelector((state: RootState) => state.cartReducer.cartedItems)
+    const cartedItems: ICartedItem[] = useSelector((state: RootState) => state.cartReducer.cartedItems);
 
     /**
      * Get the count of carted items.

@@ -22,7 +22,12 @@ const Checkout: React.FC = () => {
     const history = useHistory();
     console.log(isLogged)
 
+    /**
+     * If the user already logged navigate to payment gateway.
+     * Otherwise navigate for login page.
+     */
     const onHandlePlaceOrder = () =>{
+        /*TODO: HAS TO IMPLEMENT*/
         if(isLogged){
             history.push('/payment');
         }else {

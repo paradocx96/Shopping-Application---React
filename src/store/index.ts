@@ -1,8 +1,8 @@
 import {applyMiddleware, createStore} from "redux";
-// import {compose} from "redux";
 import {rootReducer} from "./reducers";
 import {composeWithDevTools} from "redux-devtools-extension";
 import thunkMiddleware from "redux-thunk";
+// import {compose} from "redux";
 
 const STORE_STORAGE = 'shopping-application';
 

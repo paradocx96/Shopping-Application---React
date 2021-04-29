@@ -10,7 +10,10 @@
 
   .basic-navbar-nav {
     font-size: 0.5em;
+    color:var(--text-primary-color) !important;
+    background-color: #8e8eb3;
   }
+
 
   a {
     font-size: 0.9em;

@@ -11,16 +11,29 @@ const SearchBar: React.FC = () => {
     const [search, setSearch] = useState<string>('');
 
     const dispatch = useDispatch();
+
+    /**
+     * Search the product by product name
+     * @param event
+     */
     const handleOnSubmit = (event: FormEvent) => {
         event.preventDefault();
         event.stopPropagation();
         dispatch(searchProduct(search));
     }
 
+    /**
+     * Set the user entered text into search term
+     * @param e
+     */
     const onChangeSearchTerm = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value);
         dispatch(searchProduct(''));
     }
+
+    /**
+     * Show the products which named matched with search term
+     */
     const renderSearchProducts = () => {
         return (
             products.map((product: IProduct, index: number) =>

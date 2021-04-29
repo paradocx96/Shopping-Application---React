@@ -69,6 +69,12 @@ const CartPreview: React.FC = () => {
                                       prefix={'Rs. '} value={(tot * (1 - discountPercentage)).toFixed(2)}/>
                     </Col>
                 </Row>
+                <Row className="pt-2 mx-md-2 mb-2">
+                    <Col>
+                        <Button className="custom-primary-button py-1 mt-2 float-right"
+                                onClick={onClickCheckout}>Check out</Button>
+                    </Col>
+                </Row>
             </Container>
 
         </div>
