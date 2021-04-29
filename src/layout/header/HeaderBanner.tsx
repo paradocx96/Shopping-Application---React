@@ -46,11 +46,11 @@ const HeaderBanner: React.FC = () => {
                         }
                     >
                         <div className="cart-component  pr-3">
-                            <span className="count-item float-right negation">{countOfCartedItem}</span>
+                            <span className="count-item float-right">{countOfCartedItem}</span>
                             <i className="feather-shopping-cart mr-3"/>
                         </div>
                     </OverlayTrigger>
-                    <Button className="checkout-btn d-none d-sm-block negation" variant="success"
+                    <Button className="custom-primary-button py-1 mt-2 d-none d-sm-block"
                             onClick={onClickCheckout}>Check out</Button>
                 </Col>
             </Row>

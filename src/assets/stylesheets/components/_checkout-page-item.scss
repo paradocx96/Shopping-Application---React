@@ -1,0 +1,50 @@
+@import "../common/colors";
+
+.checkout-page-item {
+  font-size: 1em;
+  color: var(--text-primary-color);
+  background-color: var(--background-primary-color);
+
+  .checkout-row-image {
+    width: 100%;
+    max-width: 70px;
+    min-width: 40px;
+  }
+
+  i{
+    cursor: pointer;
+  }
+
+  .tbl-col-num {
+    width: 2%;
+  }
+
+  .tbl-col-img {
+    width: 8%;
+  }
+
+  .tbl-col-name {
+    width: 45%;
+  }
+
+  .tbl-col-qty {
+    width: 8%;
+
+    .operators {
+      color: var(--text-secondary-color);
+    }
+  }
+
+  .tbl-col-unit-price {
+    width: 13%;
+  }
+
+  .tbl-col-unit-amount {
+    width: 18%;
+  }
+
+  .tbl-col-unit-close {
+    width: 5%;
+  }
+
+}

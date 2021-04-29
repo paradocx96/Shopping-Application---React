@@ -74,7 +74,7 @@ const Checkout: React.FC = () => {
                         (cartedItems.length>0)  &&
                         <Row className="m-0 mt-3">
                             <Col>
-                                <Button className="negation float-right" variant="success" onClick={onHandlePlaceOrder}>
+                                <Button className="float-right custom-primary-button"  onClick={onHandlePlaceOrder}>
                                     Place Order now
                                 </Button>
 
