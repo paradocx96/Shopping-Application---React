@@ -5,8 +5,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {ICartedItem, IProduct} from "../../types/product";
 import {addToCart, changeCartedCount} from "../../store/actions/ProductActions";
 import {RootState} from "../../store/reducers";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
-
+AOS.init();
 type ProductProps = {
     product: IProduct;
 }
@@ -36,7 +38,7 @@ const Product: React.FC<ProductProps> = (props) => {
     }
 
     return (
-        <Col xs={6} sm={4} lg={3} className="p-0">
+        <Col xs={6} sm={4} lg={3} className="p-0" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
             <div className="product px-2 px-md-2 px-lg-3 pt-1 pb-3 pb-md-4 m-1 m-md-2">
 
                 <Row className="m-0 negation">
