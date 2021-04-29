@@ -1,18 +1,21 @@
 import React from 'react';
 import './App.css';
-import ProductList from "./components/home/ProductList";
 import './assets/stylesheets/main.scss'
-import DarkModeToggle from "./components/DarkModeToggleDiv";
-import SearchBar from "./components/home/SearchBar";
-import Welcome from "./components/home/Welcome";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
+import Header from "./layout/Header";
+import Home from "./views/Home";
 
 function App() {
     return (
         <div className="App">
-            <DarkModeToggle/>
-            <Welcome/>
-            <SearchBar/>
-            <ProductList/>
+            <BrowserRouter>
+                <Header/>
+                <Switch>
+                    <Route path='/'>
+                        <Home/>
+                    </Route>
+                </Switch>
+            </BrowserRouter>
         </div>
     );
 }
