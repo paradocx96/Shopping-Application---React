@@ -6,6 +6,7 @@ import Header from "./layout/Header";
 import Home from "./views/Home";
 import Checkout from "./views/Checkout";
 import DashBoard from "./views/Dashboard";
+import CreateProduct from "./views/CreateProduct";
 
 function App() {
     return (
@@ -18,6 +19,9 @@ function App() {
                     </Route>
                     <Route path="/dashboard">
                         <DashBoard/>
+                    </Route>
+                    <Route path="/create-product">
+                        <CreateProduct/>
                     </Route>
                     <Route path='/'>
                         <Home/>

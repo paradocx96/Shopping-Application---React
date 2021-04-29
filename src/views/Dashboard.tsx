@@ -13,7 +13,7 @@ import {useHistory} from "react-router-dom";
 const DashBoard: React.FC = () => {
     const products: IProduct[] = useSelector((state: RootState) => state.onlineStoreReducer.products);
     const history = useHistory();
-    const onHandelCreateProduct = () => history.push('/product/create')
+    const onHandelCreateProduct = () => history.push('/create-product')
 
     return (
         <div className='dashboard-page background-color-1'>

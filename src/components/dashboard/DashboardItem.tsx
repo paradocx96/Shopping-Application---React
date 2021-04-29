@@ -4,8 +4,6 @@ import NumberFormat from "react-number-format";
 import {IProduct} from "../../types/product";
 import Swal from 'sweetalert2';
 
-import placeHolderImg from "../../assets/images/placehoderimg.png";
-
 type dashboardItemProps = {
     index: number
     product: IProduct;
