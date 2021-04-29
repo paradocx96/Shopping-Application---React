@@ -33,7 +33,7 @@ const SearchBar: React.FC = () => {
             <Row>
                 <Col sm={{span: 10, offset: 1}} md={{span: 8, offset: 2}}>
                     <Form onSubmit={handleOnSubmit}>
-                        <Row className="search-bar m-1 mt-4 mb-4 negation">
+                        <Row className="search-bar m-1 mt-4 mb-4">
                             <Col sm={10} xs={10} xl={11}>
                                 <FormControl type="text" placeholder="  Search...." className="search-bar-box mr-sm-2"
                                              onChange={onChangeSearchTerm}/>
