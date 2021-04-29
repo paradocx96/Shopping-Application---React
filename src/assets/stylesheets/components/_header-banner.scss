@@ -70,7 +70,17 @@
 
 #popover-positioned-bottom {
   font-size: 0.8em;
-  background: rgba( var(--background-primary-color), 0.8);
+  background-color: var(--background-primary-color);
+  color: var(--text-primary-color);
+}
+
+.cart-preview{
+  background-color: var(--background-primary-color);
+  color: var(--text-primary-color);
+}
+
+.cart-preview-item{
+
 }
 
 @media only screen and (max-width: 576px) {

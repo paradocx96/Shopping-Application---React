@@ -41,38 +41,32 @@ const CartPreview: React.FC = () => {
     return (
         <div className="cart-preview">
 
-            <Container className="overflow-auto cart-preview-item-list-area ml-md-4 pr-md-4">
+            <Container className="overflow-auto ml-md-4 pr-md-4">
                 {cartedItems.map((cartedItem: ICartedItem, index: number) => (
                     <CartPreviewItem product={cartedItem.product} cartedQty={cartedItem.cQty} key={index}/>
                 ))}
             </Container>
 
             <Container>
-                <Row className="sub-total pt-2 pt-md-4 mx-md-2">
+                <Row className="pt-2 pt-md-4 mx-md-2">
                     <Col xs={7} md={7} className="p-0">Subtotal ({countOfCartedItem} items)</Col>
                     <Col xs={5} md={5} className="p-0">
                         <NumberFormat displayType={'text'} thousandSeparator={true} className="float-right"
                                       prefix={'Rs. '} value={tot.toFixed(2)}/>
                     </Col>
                 </Row>
-                <Row className="discount pb-2 mx-md-2">
+                <Row className="text-danger pb-2 mx-md-2">
                     <Col xs={7} md={7} className="p-0">Discount</Col>
                     <Col xs={5} md={5} className="p-0">
                         <NumberFormat displayType={'text'} thousandSeparator={true} className="float-right"
                                       prefix={'Rs. '} value={(tot * discountPercentage).toFixed(2)}/>
                     </Col>
                 </Row>
-                <Row className="total pt-2 mx-md-2 mb-2">
+                <Row className="pt-2 mx-md-2 mb-2">
                     <Col xs={7} md={7} className="p-0">Total</Col>
                     <Col xs={5} md={5} className="p-0">
                         <NumberFormat displayType={'text'} thousandSeparator={true} className="float-right"
                                       prefix={'Rs. '} value={(tot * (1 - discountPercentage)).toFixed(2)}/>
-                    </Col>
-                </Row>
-                <Row className="d-sm-none d-xs-block">
-                    <Col className="p-0">
-                        <Button className="float-right checkout-btn mb-2 negation" variant="success"
-                                onClick={onClickCheckout}>Check out</Button>
                     </Col>
                 </Row>
             </Container>
