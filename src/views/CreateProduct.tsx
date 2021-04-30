@@ -1,6 +1,8 @@
 import React, {ChangeEvent, FormEvent, useState} from 'react';
 import {Button, CardImg, Col, Container, Form, Row} from "react-bootstrap";
 import {useHistory} from "react-router-dom";
+import axios from "axios";
+import {BASE_URL} from "../constants/baseUrl";
 
 
 const CreateProduct: React.FC = () => {
@@ -44,6 +46,7 @@ const CreateProduct: React.FC = () => {
         (text) ? setIsActiveStockQty(true) : setIsActiveStockQty(false);
     }
 
+
     const handleOnSubmit = (event: FormEvent) => {
         try {
             event.preventDefault();
@@ -65,6 +68,27 @@ const CreateProduct: React.FC = () => {
             );
 
             // TODO: Create product in database
+            axios.post(BASE_URL + 'add-product',
+                {
+                    id: "product",
+                    title: title,
+                    sellPrice: sellPrice,
+                    price: price,
+                    image: imageUrl + "11111111",
+                    cType: cType,
+                    stockQty: stockQty
+
+                })
+                .then(function (response) {
+                    console.log(response)
+                })
+                .catch(function (error) {
+                    /* handle error.In this, just show the error */
+                    console.log(error);
+                })
+                .then(function () {
+                    /* always executed */
+                });
 
         } catch (err) {
             alert(err);
@@ -116,7 +140,7 @@ const CreateProduct: React.FC = () => {
 
 
                                 <Form.Group controlId="formBasicImage">
-                                    <Form.Label>Product Image</Form.Label>    <br/>
+                                    <Form.Label>Product Image</Form.Label> <br/>
                                     <input type='file' required className='float-label mt-3' onChange={(e) =>
                                         onChangeImageInput(e)}/>
                                     <Form.Control.Feedback type="invalid">
