@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {IProduct} from "../types/product";
 import {Button, Container, Table} from "react-bootstrap";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../store/reducers";
 import DashboardItem from "../components/dashboard/DashboardItem";
 import {useHistory} from "react-router-dom";
+import axios from "axios";
+import {BASE_URL} from "../constants/baseUrl";
+import {addAllProductsFromDb} from "../store/actions/ProductActions";
 
 /**
  * Show all product list for admin.
@@ -13,7 +16,22 @@ import {useHistory} from "react-router-dom";
 const DashBoard: React.FC = () => {
     const products: IProduct[] = useSelector((state: RootState) => state.onlineStoreReducer.products);
     const history = useHistory();
-    const onHandelCreateProduct = () => history.push('/create-product')
+    const onHandelCreateProduct = () => history.push('/create-product');
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        axios.get(BASE_URL + 'get-all-product')
+            .then(function (response) {
+                dispatch(addAllProductsFromDb(response.data));
+            })
+            .catch(function (error) {
+                /* handle error.In this, just show the error */
+                console.log(error);
+            })
+            .then(function () {
+                /* always executed */
+            });
+    },[])
 
     return (
         <div className='dashboard-page background-color-1'>

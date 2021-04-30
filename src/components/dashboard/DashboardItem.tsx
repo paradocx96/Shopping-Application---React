@@ -3,6 +3,10 @@ import {Button, Image} from "react-bootstrap";
 import NumberFormat from "react-number-format";
 import {IProduct} from "../../types/product";
 import Swal from 'sweetalert2';
+import axios from "axios";
+import {BASE_URL} from "../../constants/baseUrl";
+import {addAllProductsFromDb} from "../../store/actions/ProductActions";
+import {useDispatch} from "react-redux";
 
 type dashboardItemProps = {
     index: number
@@ -17,11 +21,9 @@ type dashboardItemProps = {
 const DashboardItem: React.FC<dashboardItemProps> = (props) => {
     const {index, product} = props;
     const [isUpdatable, setIsUpdatable] = useState<boolean>(false);
-
     let sellPrice: number = product.sellPrice;
     let price: null | number = product.price ? product.price : product.sellPrice;
     let stockQty: null | number = product.stockQty;
-
 
     /**
      * Update product in database
@@ -48,6 +50,29 @@ const DashboardItem: React.FC<dashboardItemProps> = (props) => {
         }).then((result) => {
             if (result.isConfirmed) {
                 //TODO:Update qty product from mongodb db. Recall products form backend into redux store.
+                axios.put(BASE_URL + 'update-product',
+                    {
+                        // id: product.id,
+                        id: "product001",
+                        title: product.title,
+                        sellPrice: sellPrice,
+                        price: price,
+                        image: product.image,
+                        cType: product.cType,
+                        stockQty: stockQty
+                    }
+                )
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        /* handle error.In this, just show the error */
+                        console.log(error);
+                    })
+                    .then(function () {
+                        /* always executed */
+                    });
+
                 setIsUpdatable(false);
 
                 swalWithBootstrapButtons.fire(
