@@ -1,9 +1,9 @@
 import React, {ChangeEvent, FormEvent, useState} from 'react';
-import {Button, CardImg, Col, Container, Form, Row} from "react-bootstrap";
+import {Button, CardImg, Col, Container, Form, Row, Spinner} from "react-bootstrap";
 import {useHistory} from "react-router-dom";
 import axios from "axios";
 import {BASE_URL} from "../constants/baseUrl";
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
 
 const CreateProduct: React.FC = () => {
     const [validated, setValidated] = useState<boolean>(false);
@@ -13,19 +13,27 @@ const CreateProduct: React.FC = () => {
     const [imageUrl, setImageUrl] = useState<string | null>(null);
     const [cType, setCType] = useState<string | null>(null);
     const [stockQty, setStockQty] = useState<number | null>(null);
+    const [isCreatingProduct, setIsCreatingProduct] = useState<boolean>(false);
+    const [isUploadingImage, setIsUploadingImage] = useState<boolean>(false);
     const categories: string[] = ["Grocery", "Fruits", "Veggies", "Bakery", "Electronics"];
     const history = useHistory();
     const onHandleBackToDashboard = () => history.push('/dashboard');
 
+    /**
+     * Upload image.
+     * @param e
+     */
     const onChangeImageInput = async (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
             const file: File = e.target.files[0];
+            setIsUploadingImage(true);
             //TODO: Create Image upload
 
             // uploadImage(file).then(r => {
             //     setImageUrl(r.getURL);
             // });
             setImageUrl("Imge");
+            setIsUploadingImage(true);
         }
     };
 
@@ -43,9 +51,10 @@ const CreateProduct: React.FC = () => {
             /**
              * Create new product in database.
              */
+            setIsCreatingProduct(true);
             axios.post(BASE_URL + 'add-product',
                 {
-                    id: "product"+ uuidv4(),
+                    id: "product" + uuidv4(),
                     title: title,
                     sellPrice: sellPrice,
                     price: price,
@@ -72,12 +81,12 @@ const CreateProduct: React.FC = () => {
                     Array.from(document.querySelectorAll("input")).forEach(
                         input => (input.value = "")
                     );
+                    setIsCreatingProduct(false);
                 });
         } catch (err) {
             alert(err);
         }
     }
-
 
     return (
         <div className='new-product-dev m-auto'>
@@ -153,8 +162,14 @@ const CreateProduct: React.FC = () => {
                                         This field can not be empty.
                                     </Form.Control.Feedback>
                                 </Form.Group>
-                                <Button type="submit" className='custom-primary-button my-2'>
-                                    Create Now</Button>
+                                <Button type="submit" className='float-right custom-primary-button my-2'
+                                        disabled={isCreatingProduct || isUploadingImage}>
+                                    Create Now &nbsp;
+                                    {
+                                        isCreatingProduct &&
+                                        <Spinner size="sm" role="status" aria-hidden="true" animation="border"/>
+                                    }
+                                </Button>
                             </Form>
                         </div>
                     </Col>
