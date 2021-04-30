@@ -61,10 +61,9 @@ const DashboardItem: React.FC<dashboardItemProps> = (props) => {
                         cType: product.cType,
                         stockQty: stockQty
                     }
-                )
-                    .then(function (response) {
-                        console.log(response);
-                    })
+                ).then(function (response) {
+                    console.log(response);
+                })
                     .catch(function (error) {
                         /* handle error.In this, just show the error */
                         console.log(error);
@@ -114,6 +113,17 @@ const DashboardItem: React.FC<dashboardItemProps> = (props) => {
         }).then((result) => {
             if (result.isConfirmed) {
                 //TODO:Delete product from mongodb db. Recall products form backend into redux store.
+                axios.get(BASE_URL + 'delete-product/product006')
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        /* handle error.In this, just show the error */
+                        console.log(error);
+                    })
+                    .then(function () {
+                        /* always executed */
+                    });
             } else if (
                 result.dismiss === Swal.DismissReason.cancel
             ) {
