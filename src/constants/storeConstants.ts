@@ -1,4 +1,5 @@
 export const ADD_PRODUCT = 'ADD_PRODUCT';
+export const ADD_ALL_PRODUCTS_FROM_DB = 'ADD_ALL_PRODUCTS_FROM_DB';
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 export const DELETE_PRODUCT = 'DELETE_PRODUCT';
 export const ADD_TO_CART = 'ADD_TO_CART';
