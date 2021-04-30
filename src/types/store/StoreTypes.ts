@@ -6,7 +6,12 @@ import {
     REMOVE_FROM_CART,
     CHANGE_CARTED_COUNT,
     UPDATE_PRODUCT,
-    SEARCH_PRODUCT, SET_DARK_MODE, SET_CUSTOMER_LOGED, SET_CUSTOMER_LOG_OUT, RESET_SELECTED_CATEGORY
+    SEARCH_PRODUCT,
+    SET_DARK_MODE,
+    SET_CUSTOMER_LOGED,
+    SET_CUSTOMER_LOG_OUT,
+    RESET_SELECTED_CATEGORY,
+    ADD_ALL_PRODUCTS_FROM_DB
 } from "../../constants/storeConstants";
 
 
@@ -63,6 +68,11 @@ export interface RemoveFromCart {
  * Still not use Add product, Update product, Delete Product
  * Search product only have implement still this level
  */
+export interface AddAllProductsFromDb {
+    type: typeof ADD_ALL_PRODUCTS_FROM_DB;
+    payload: IProduct[];
+}
+
 export interface AddProduct {
     type: typeof ADD_PRODUCT;
     payload: IProduct;
@@ -84,7 +94,15 @@ export interface SearchProduct {
 }
 
 
-export type OnlineStoreActionTypes = AddProduct | UpdateProduct | DeleteProduct | SearchProduct | SetDarkTheme |
-    SetCustomerLogged | SetCustomerLoggedOut | ResetSelectedCategory
+export type OnlineStoreActionTypes =
+    AddAllProductsFromDb
+    | AddProduct
+    | UpdateProduct
+    | DeleteProduct
+    | SearchProduct
+    | SetDarkTheme
+    | SetCustomerLogged
+    | SetCustomerLoggedOut
+    | ResetSelectedCategory
 
 export type CartActionTypes = AddToCart | ChangeCartedQty | RemoveFromCart

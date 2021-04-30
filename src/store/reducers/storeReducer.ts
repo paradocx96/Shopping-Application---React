@@ -1,5 +1,6 @@
 import {OnlineStoreActionTypes, OnlineStoreState} from "../../types/store/StoreTypes";
 import {
+    ADD_ALL_PRODUCTS_FROM_DB,
     ADD_PRODUCT,
     DELETE_PRODUCT, RESET_SELECTED_CATEGORY,
     SEARCH_PRODUCT, SET_CUSTOMER_LOG_OUT, SET_CUSTOMER_LOGED, SET_DARK_MODE,
@@ -40,7 +41,8 @@ const initialState: OnlineStoreState = {
 export const OnlineStoreReducer =
     (state: OnlineStoreState = initialState, action: OnlineStoreActionTypes): OnlineStoreState => {
         switch (action.type) {
-
+            case ADD_ALL_PRODUCTS_FROM_DB:
+                return {...state, products: action.payload}
             case ADD_PRODUCT:
                 return {...state, products: [...state.products, action.payload]}
             case UPDATE_PRODUCT:

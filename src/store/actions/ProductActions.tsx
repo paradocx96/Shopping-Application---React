@@ -1,5 +1,6 @@
 import {ICartedItem, IProduct} from "../../types/product";
 import {
+    ADD_ALL_PRODUCTS_FROM_DB,
     ADD_PRODUCT,
     ADD_TO_CART,
     CHANGE_CARTED_COUNT,
@@ -12,8 +13,19 @@ import {
 } from "../../constants/storeConstants";
 import {CartActionTypes, OnlineStoreActionTypes} from "../../types/store/StoreTypes";
 
+
 /**
- * Add product into the store
+ * Get all products from the database through REST API.
+ * On load the client side app this funtion works.
+ * @param products
+ */
+export const addAllProductsFromDb = (products: IProduct[]): OnlineStoreActionTypes => ({
+    type: ADD_ALL_PRODUCTS_FROM_DB,
+    payload: products
+})
+
+/**
+ * Add product into the database. (Create new product)
  * Admin have a power to add new item into store. Still not implement
  * @param product
  */
