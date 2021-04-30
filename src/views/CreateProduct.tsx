@@ -3,15 +3,10 @@ import {Button, CardImg, Col, Container, Form, Row} from "react-bootstrap";
 import {useHistory} from "react-router-dom";
 import axios from "axios";
 import {BASE_URL} from "../constants/baseUrl";
-
+import { v4 as uuidv4 } from 'uuid';
 
 const CreateProduct: React.FC = () => {
     const [validated, setValidated] = useState<boolean>(false);
-    const [isActiveTitle, setIsActiveTitle] = useState<boolean>(false);
-    const [isActivePrice, setIsActivePrice] = useState<boolean>(false);
-    const [isActiveSellPrice, setIsActiveSellPrice] = useState<boolean>(false);
-    const [isActiveCType, setIsActiveCType] = useState<boolean>(false);
-    const [isActiveStockQty, setIsActiveStockQty] = useState<boolean>(false);
     const [title, setTitle] = useState<string | null>(null);
     const [price, setPrice] = useState<number | null>(null);
     const [sellPrice, setSellPrice] = useState<number | null>(null);
@@ -19,81 +14,8 @@ const CreateProduct: React.FC = () => {
     const [cType, setCType] = useState<string | null>(null);
     const [stockQty, setStockQty] = useState<number | null>(null);
     const categories: string[] = ["Grocery", "Fruits", "Veggies", "Bakery", "Electronics"];
-
-
-    const onChangeTitle = (text: string) => {
-        setTitle(text);
-        (text) ? setIsActiveTitle(true) : setIsActiveTitle(false);
-    }
-
-    const onChangePrice = (text: number) => {
-        setPrice(text);
-        (text) ? setIsActivePrice(true) : setIsActivePrice(false);
-    }
-
-    const onChangeSellPrice = (text: number) => {
-        setSellPrice(text);
-        (text) ? setIsActiveSellPrice(true) : setIsActiveSellPrice(false);
-    }
-
-    const onChangeCType = (text: string) => {
-        setCType(text);
-        // (text) ? setIsActiveCType(true) : setIsActiveCType(false);
-    }
-
-    const onChangeStockQty = (text: number) => {
-        setStockQty(text);
-        (text) ? setIsActiveStockQty(true) : setIsActiveStockQty(false);
-    }
-
-
-    const handleOnSubmit = (event: FormEvent) => {
-        try {
-            event.preventDefault();
-            event.stopPropagation();
-            setValidated(true);
-            setTitle(null);
-            setPrice(null);
-            setSellPrice(null);
-            setImageUrl(null);
-            setCType(null);
-            setStockQty(null);
-            setIsActiveTitle(false);
-            setIsActivePrice(false);
-            setIsActiveSellPrice(false);
-            setIsActiveCType(false);
-            setIsActiveStockQty(false);
-            Array.from(document.querySelectorAll("input")).forEach(
-                input => (input.value = "")
-            );
-
-            // TODO: Create product in database
-            axios.post(BASE_URL + 'add-product',
-                {
-                    id: "product",
-                    title: title,
-                    sellPrice: sellPrice,
-                    price: price,
-                    image: imageUrl + "11111111",
-                    cType: cType,
-                    stockQty: stockQty
-
-                })
-                .then(function (response) {
-                    console.log(response)
-                })
-                .catch(function (error) {
-                    /* handle error.In this, just show the error */
-                    console.log(error);
-                })
-                .then(function () {
-                    /* always executed */
-                });
-
-        } catch (err) {
-            alert(err);
-        }
-    }
+    const history = useHistory();
+    const onHandleBackToDashboard = () => history.push('/dashboard');
 
     const onChangeImageInput = async (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
@@ -103,10 +25,59 @@ const CreateProduct: React.FC = () => {
             // uploadImage(file).then(r => {
             //     setImageUrl(r.getURL);
             // });
+            setImageUrl("Imge");
         }
     };
-    const history = useHistory();
-    const onHandleBackToDashboard = () => history.push('/dashboard')
+
+    const handleOnSubmit = (event: FormEvent) => {
+        try {
+            event.preventDefault();
+            event.stopPropagation();
+            setValidated(true);
+
+            if (title === null || price === null || sellPrice === null || imageUrl === null || cType === null ||
+                stockQty === null) {
+                return;
+            }
+
+            /**
+             * Create new product in database.
+             */
+            axios.post(BASE_URL + 'add-product',
+                {
+                    id: "product"+ uuidv4(),
+                    title: title,
+                    sellPrice: sellPrice,
+                    price: price,
+                    image: imageUrl + "",
+                    cType: cType,
+                    stockQty: stockQty
+                })
+                .then(function (response) {
+                    console.log(response)
+                })
+                .catch(function (error) {
+                    /* handle error.In this, just show the error */
+                    console.log(error);
+                })
+                .then(function () {
+                    setValidated(true);
+                    setTitle(null);
+                    setPrice(null);
+                    setSellPrice(null);
+                    setImageUrl(null);
+                    setCType(null);
+                    setStockQty(null);
+                    setValidated(false);
+                    Array.from(document.querySelectorAll("input")).forEach(
+                        input => (input.value = "")
+                    );
+                });
+        } catch (err) {
+            alert(err);
+        }
+    }
+
 
     return (
         <div className='new-product-dev m-auto'>
@@ -132,7 +103,7 @@ const CreateProduct: React.FC = () => {
                                 <Form.Group controlId="formBasicName">
                                     <Form.Label>Product Name</Form.Label>
                                     <Form.Control type="text" placeholder="Product name" required
-                                                  onChange={(e) => onChangeTitle(e.target.value)}/>
+                                                  onChange={(e) => setTitle(e.target.value)}/>
                                     <Form.Control.Feedback type="invalid">
                                         This field can not be empty.
                                     </Form.Control.Feedback>
@@ -151,7 +122,7 @@ const CreateProduct: React.FC = () => {
                                 <Form.Group controlId="formBasicType">
                                     <Form.Label>Product Type</Form.Label>
                                     <Form.Control as="select" defaultValue="Choose..."
-                                                  onChange={(e) => onChangeCType(e.target.value)}>
+                                                  onChange={(e) => setCType(e.target.value)}>
                                         {categories.map((val: string) => <option>{val}</option>)}
                                     </Form.Control>
                                 </Form.Group>
@@ -159,7 +130,7 @@ const CreateProduct: React.FC = () => {
                                 <Form.Group controlId="formBasicPrice">
                                     <Form.Label>Product Price</Form.Label>
                                     <Form.Control type="number" placeholder="Product price" required
-                                                  onChange={(e) => onChangePrice(Number(e.target.value))}/>
+                                                  onChange={(e) => setPrice(Number(e.target.value))}/>
                                     <Form.Control.Feedback type="invalid">
                                         This field can not be empty.
                                     </Form.Control.Feedback>
@@ -169,7 +140,7 @@ const CreateProduct: React.FC = () => {
                                 <Form.Group controlId="formBasicSellPrice">
                                     <Form.Label>Product Selling Price</Form.Label>
                                     <Form.Control type="number" placeholder="Product selling price" required
-                                                  onChange={(e) => onChangeSellPrice(Number(e.target.value))}/>
+                                                  onChange={(e) => setSellPrice(Number(e.target.value))}/>
                                     <Form.Control.Feedback type="invalid">
                                         This field can not be empty.
                                     </Form.Control.Feedback>
@@ -177,14 +148,13 @@ const CreateProduct: React.FC = () => {
                                 <Form.Group controlId="formBasicQty">
                                     <Form.Label>Quantity of Product</Form.Label>
                                     <Form.Control type="number" placeholder="Product count" required
-                                                  onChange={(e) => onChangeStockQty(Number(e.target.value))}/>
+                                                  onChange={(e) => setStockQty(Number(e.target.value))}/>
                                     <Form.Control.Feedback type="invalid">
                                         This field can not be empty.
                                     </Form.Control.Feedback>
                                 </Form.Group>
-                                <Button type="submit" className='custom-primary-button my-2'>Create
-                                    Now</Button>
-
+                                <Button type="submit" className='custom-primary-button my-2'>
+                                    Create Now</Button>
                             </Form>
                         </div>
                     </Col>

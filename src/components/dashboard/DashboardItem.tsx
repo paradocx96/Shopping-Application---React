@@ -1,12 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Button, Image} from "react-bootstrap";
 import NumberFormat from "react-number-format";
 import {IProduct} from "../../types/product";
 import Swal from 'sweetalert2';
 import axios from "axios";
 import {BASE_URL} from "../../constants/baseUrl";
-import {addAllProductsFromDb} from "../../store/actions/ProductActions";
-import {useDispatch} from "react-redux";
 
 type dashboardItemProps = {
     index: number
@@ -52,8 +50,7 @@ const DashboardItem: React.FC<dashboardItemProps> = (props) => {
                 //TODO:Update qty product from mongodb db. Recall products form backend into redux store.
                 axios.put(BASE_URL + 'update-product',
                     {
-                        // id: product.id,
-                        id: "product001",
+                        id: product.id,
                         title: product.title,
                         sellPrice: sellPrice,
                         price: price,
@@ -67,11 +64,7 @@ const DashboardItem: React.FC<dashboardItemProps> = (props) => {
                     .catch(function (error) {
                         /* handle error.In this, just show the error */
                         console.log(error);
-                    })
-                    .then(function () {
-                        /* always executed */
                     });
-
                 setIsUpdatable(false);
 
                 swalWithBootstrapButtons.fire(
@@ -113,16 +106,13 @@ const DashboardItem: React.FC<dashboardItemProps> = (props) => {
         }).then((result) => {
             if (result.isConfirmed) {
                 //TODO:Delete product from mongodb db. Recall products form backend into redux store.
-                axios.get(BASE_URL + 'delete-product/product006')
+                axios.get(BASE_URL + 'delete-product/' + product.id)
                     .then(function (response) {
                         console.log(response);
                     })
                     .catch(function (error) {
                         /* handle error.In this, just show the error */
                         console.log(error);
-                    })
-                    .then(function () {
-                        /* always executed */
                     });
             } else if (
                 result.dismiss === Swal.DismissReason.cancel
