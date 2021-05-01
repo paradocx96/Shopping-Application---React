@@ -7,8 +7,6 @@ import {
     FLUSH_CART,
     REMOVE_FROM_CART,
     SEARCH_PRODUCT,
-    SET_CUSTOMER_LOG_OUT,
-    SET_CUSTOMER_LOGED,
 } from "../../constants/storeConstants";
 import {CartActionTypes, OnlineStoreActionTypes} from "../../types/store/StoreTypes";
 
@@ -75,8 +73,5 @@ export const flushCart = (): CartActionTypes => ({
     type: FLUSH_CART,
 })
 
-export const setCustomerLogOut= (): OnlineStoreActionTypes => ({
-    type: SET_CUSTOMER_LOG_OUT
-})
 
 

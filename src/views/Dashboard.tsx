@@ -27,9 +27,6 @@ const DashBoard: React.FC = () => {
             .catch(function (error) {
                 /* handle error.In this, just show the error */
                 console.log(error);
-            })
-            .then(function () {
-                /* always executed */
             });
     }, [isDisableButtons])
 

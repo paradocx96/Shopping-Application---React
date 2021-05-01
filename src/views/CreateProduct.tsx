@@ -5,6 +5,10 @@ import axios from "axios";
 import {v4 as uuidv4} from 'uuid';
 import ImgUpload from "../components/dashboard/ImageUpload";
 
+/**
+ * Render Create product page.
+ * @constructor
+ */
 const CreateProduct: React.FC = () => {
     const [validated, setValidated] = useState<boolean>(false);
     const [title, setTitle] = useState<string | null>(null);

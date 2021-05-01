@@ -4,12 +4,15 @@ import NumberFormat from "react-number-format";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../store/reducers";
 import {ICartedItem} from "../types/product";
-import {useHistory} from "react-router-dom";
 import CartedItem from "../components/checkout/CartedItem";
 import {v4 as uuidv4} from 'uuid';
 import axios from "axios";
 import {flushCart} from "../store/actions/ProductActions";
 
+/**
+ * Render checkout page.
+ * @constructor
+ */
 const Checkout: React.FC = () => {
     const cartedItems: ICartedItem[] = useSelector(((state: RootState) => state.cartReducer.cartedItems))
     const [tot, setTot] = useState<number>(0);
@@ -24,8 +27,6 @@ const Checkout: React.FC = () => {
         }, [cartedItems]
     )
     const isLogged: boolean = useSelector(((state: RootState) => state.onlineStoreReducer.isLogged))
-    const history = useHistory();
-    console.log(isLogged)
 
     /**
      * If the user already logged navigate to payment gateway.
@@ -81,9 +82,6 @@ const Checkout: React.FC = () => {
             setIsPlaceOrdering(false);
             dispatch(flushCart())
         })
-
-        //-------------------------------
-
     }
 
     return (

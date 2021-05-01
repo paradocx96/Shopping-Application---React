@@ -103,7 +103,8 @@ const ImgUpload: React.FC<ImgCropProps> = (props) => {
                     {
                         isVisible &&
                             <React.Fragment>
-                                <Button className='custom-primary-button float-right mt-2' onClick={cropImage}>Crop Image</Button>
+                                <Button className='custom-primary-button float-right mt-2' onClick={cropImage}>
+                                    Crop Image</Button>
 
                                 <br/>
                                 <br/>
