@@ -4,6 +4,8 @@ import {useHistory} from "react-router-dom";
 import axios from "axios";
 import {BASE_URL} from "../constants/baseUrl";
 import {v4 as uuidv4} from 'uuid';
+import ImageUpload from "../components/dashboard/ImageUpload";
+import ImgUpload from "../components/dashboard/ImageUpload";
 
 const CreateProduct: React.FC = () => {
     const [validated, setValidated] = useState<boolean>(false);
@@ -18,32 +20,6 @@ const CreateProduct: React.FC = () => {
     const categories: string[] = ["Grocery", "Fruits", "Veggies", "Bakery", "Electronics"];
     const history = useHistory();
     const onHandleBackToDashboard = () => history.push('/dashboard');
-
-    /**
-     * Upload image.
-     * @param e
-     */
-    const onChangeImageInput = async (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files) {
-            const file: File = e.target.files[0];
-            setIsUploadingImage(true);
-            const data = new FormData();
-            data.append('file', file);
-            data.append('upload_preset', 'sliit_shoping_application_react')
-
-            axios.post("https://api.cloudinary.com/v1_1/djvpvdfqp/image/upload", data)
-                .then(function (response) {
-                    console.log(response)
-                    setImageUrl(response.data.secure_url);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                })
-                .then(function () {
-                    setIsUploadingImage(true);
-                });
-        }
-    };
 
     const handleOnSubmit = (event: FormEvent) => {
         try {
@@ -111,26 +87,13 @@ const CreateProduct: React.FC = () => {
                     <Col>
                         <div className="create-product p-3">
                             <h2 className="pt-5">Create Product</h2>
-                            {imageUrl &&
-                            <CardImg className="image-preview pt-3 negation" variant="top" src={imageUrl}/>
-                            }
+                            <ImgUpload setImageUrl={setImageUrl} setIsImageUploading={setIsUploadingImage}/>
                             <Form noValidate validated={validated} onSubmit={handleOnSubmit}>
-
 
                                 <Form.Group controlId="formBasicName">
                                     <Form.Label>Product Name</Form.Label>
                                     <Form.Control type="text" placeholder="Product name" required
                                                   onChange={(e) => setTitle(e.target.value)}/>
-                                    <Form.Control.Feedback type="invalid">
-                                        This field can not be empty.
-                                    </Form.Control.Feedback>
-                                </Form.Group>
-
-
-                                <Form.Group controlId="formBasicImage">
-                                    <Form.Label>Product Image</Form.Label> <br/>
-                                    <input type='file' required className='float-label mt-3' onChange={(e) =>
-                                        onChangeImageInput(e)}/>
                                     <Form.Control.Feedback type="invalid">
                                         This field can not be empty.
                                     </Form.Control.Feedback>
@@ -153,7 +116,6 @@ const CreateProduct: React.FC = () => {
                                     </Form.Control.Feedback>
                                 </Form.Group>
 
-
                                 <Form.Group controlId="formBasicSellPrice">
                                     <Form.Label>Product Selling Price</Form.Label>
                                     <Form.Control type="number" placeholder="Product selling price" required
@@ -162,6 +124,7 @@ const CreateProduct: React.FC = () => {
                                         This field can not be empty.
                                     </Form.Control.Feedback>
                                 </Form.Group>
+
                                 <Form.Group controlId="formBasicQty">
                                     <Form.Label>Quantity of Product</Form.Label>
                                     <Form.Control type="number" placeholder="Product count" required
@@ -170,6 +133,7 @@ const CreateProduct: React.FC = () => {
                                         This field can not be empty.
                                     </Form.Control.Feedback>
                                 </Form.Group>
+
                                 <Button type="submit" className='float-right custom-primary-button my-2'
                                         disabled={isCreatingProduct || isUploadingImage}>
                                     Create Now &nbsp;
