@@ -27,13 +27,21 @@ const CreateProduct: React.FC = () => {
         if (e.target.files) {
             const file: File = e.target.files[0];
             setIsUploadingImage(true);
-            //TODO: Create Image upload
+            const data = new FormData();
+            data.append('file', file);
+            data.append('upload_preset', 'sliit_shoping_application_react')
 
-            // uploadImage(file).then(r => {
-            //     setImageUrl(r.getURL);
-            // });
-            setImageUrl("Imge");
-            setIsUploadingImage(true);
+            axios.post("https://api.cloudinary.com/v1_1/djvpvdfqp/image/upload", data)
+                .then(function (response) {
+                    console.log(response)
+                    setImageUrl(response.data.secure_url);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+                .then(function () {
+                    setIsUploadingImage(true);
+                });
         }
     };
 
