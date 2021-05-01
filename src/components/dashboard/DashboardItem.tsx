@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, Image} from "react-bootstrap";
+import {Button, Image, Spinner} from "react-bootstrap";
 import NumberFormat from "react-number-format";
 import {IProduct} from "../../types/product";
 import Swal from 'sweetalert2';
@@ -21,6 +21,8 @@ type dashboardItemProps = {
 const DashboardItem: React.FC<dashboardItemProps> = (props) => {
     const {index, product, isDisableButtons, setIsDisableButtons} = props;
     const [isUpdatable, setIsUpdatable] = useState<boolean>(false);
+    const [isDeleting, setIsDeleting] = useState<boolean>(false);
+    const [isUpdating, setIsUpdating] = useState<boolean>(false);
     let sellPrice: number = product.sellPrice;
     let price: null | number = product.price ? product.price : product.sellPrice;
     let stockQty: null | number = product.stockQty;
@@ -51,6 +53,7 @@ const DashboardItem: React.FC<dashboardItemProps> = (props) => {
             if (result.isConfirmed) {
                 //TODO:Update qty product from mongodb db. Recall products form backend into redux store.
                 setIsDisableButtons(true);
+                setIsUpdating(true);
                 axios.put(BASE_URL + 'update-product',
                     {
                         id: product.id,
@@ -69,6 +72,7 @@ const DashboardItem: React.FC<dashboardItemProps> = (props) => {
                         console.log(error);
                     }).then(function (){
                     setIsDisableButtons(false);
+                    setIsUpdating(false);
                 })
                 setIsUpdatable(false);
 
@@ -112,6 +116,7 @@ const DashboardItem: React.FC<dashboardItemProps> = (props) => {
             if (result.isConfirmed) {
                 //TODO:Delete product from mongodb db. Recall products form backend into redux store.
                 setIsDisableButtons(true);
+                setIsDeleting(true);
                 axios.get(BASE_URL + 'delete-product/' + product.id)
                     .then(function (response) {
                         console.log(response);
@@ -121,6 +126,7 @@ const DashboardItem: React.FC<dashboardItemProps> = (props) => {
                         console.log(error);
                     }).then(function (){
                     setIsDisableButtons(false);
+                    setIsDeleting(false);
                 });
             } else if (
                 result.dismiss === Swal.DismissReason.cancel
@@ -176,11 +182,20 @@ const DashboardItem: React.FC<dashboardItemProps> = (props) => {
                 <td>
                     <Button onClick={handleOnUpdate} className="negation" disabled={isDisableButtons}
                             variant={isUpdatable ? 'primary' : 'warning'}>{isUpdatable ? 'Update' : 'edit'}
+                        {
+                            isUpdating &&
+                            <Spinner size="sm" role="status" aria-hidden="true" animation="border"/>
+                        }
                     </Button>
                 </td>
                 <td>
-                    <Button onClick={handleOnDelete} variant='danger' disabled={isDisableButtons}
-                            className="negation">Delete</Button>
+                    <Button onClick={handleOnDelete} variant='danger' disabled={isDisableButtons}>Delete
+                        {
+                            isDeleting &&
+                            <Spinner size="sm" role="status" aria-hidden="true" animation="border"/>
+                        }
+
+                    </Button>
                 </td>
 
             </tr>
