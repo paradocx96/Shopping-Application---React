@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {IProduct} from "../types/product";
 import {Button, Container, Table} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
@@ -18,6 +18,7 @@ const DashBoard: React.FC = () => {
     const history = useHistory();
     const onHandelCreateProduct = () => history.push('/create-product');
     const dispatch = useDispatch();
+    const [isDisableButtons, setIsDisableButtons] = useState(false);
 
     useEffect(() => {
         axios.get(BASE_URL + 'get-all-product')
@@ -58,7 +59,9 @@ const DashBoard: React.FC = () => {
                     <tbody>
                     {
                         products.map((product: IProduct, index: number) =>
-                            <DashboardItem key={index} index={index} product={product}/>)
+                            <DashboardItem key={index} index={index} product={product}
+                                           isDisableButtons={isDisableButtons}
+                                           setIsDisableButtons={setIsDisableButtons}/>)
                     }
 
                     </tbody>
