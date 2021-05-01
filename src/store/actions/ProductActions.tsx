@@ -4,15 +4,13 @@ import {
     ADD_PRODUCT,
     ADD_TO_CART,
     CHANGE_CARTED_COUNT,
-    DELETE_PRODUCT,
+    FLUSH_CART,
     REMOVE_FROM_CART,
     SEARCH_PRODUCT,
     SET_CUSTOMER_LOG_OUT,
     SET_CUSTOMER_LOGED,
-    UPDATE_PRODUCT,
 } from "../../constants/storeConstants";
 import {CartActionTypes, OnlineStoreActionTypes} from "../../types/store/StoreTypes";
-
 
 /**
  * Get all products from the database through REST API.
@@ -35,27 +33,6 @@ export const addProduct = (product: IProduct): OnlineStoreActionTypes => ({
 })
 
 /**
- * Update product quantity the store
- * When place order quantity will reduce.
- * Admin can update stoke. Still not implement
- * @param product
- */
-export const updateProduct = (product: IProduct): OnlineStoreActionTypes => ({
-    type: UPDATE_PRODUCT,
-    payload: product
-})
-
-/**
- * Delete product quantity the store
- * Admin can remove selected product from store. Still not implement
- * @param product
- */
-export const deleteProduct = (product: IProduct): OnlineStoreActionTypes => ({
-    type: DELETE_PRODUCT,
-    payload: product
-})
-
-/**
  * Search product by search bar
  * @param searchTerm
  */
@@ -63,8 +40,6 @@ export const searchProduct = (searchTerm: string): OnlineStoreActionTypes => ({
     type: SEARCH_PRODUCT,
     payload: searchTerm
 })
-
-
 
 /**
  * add a product into cart
@@ -93,9 +68,11 @@ export const removeFromCart = (product: IProduct): CartActionTypes => ({
     payload: product
 })
 
-
-export const setCustomerLogIn = (): OnlineStoreActionTypes => ({
-    type: SET_CUSTOMER_LOGED
+/**
+ * Remove all products from the cart, and reset cart
+ */
+export const flushCart = (): CartActionTypes => ({
+    type: FLUSH_CART,
 })
 
 export const setCustomerLogOut= (): OnlineStoreActionTypes => ({

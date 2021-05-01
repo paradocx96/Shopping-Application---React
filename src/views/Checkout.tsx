@@ -1,19 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Col, Container, Row, Spinner, Table} from "react-bootstrap";
 import NumberFormat from "react-number-format";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../store/reducers";
 import {ICartedItem} from "../types/product";
 import {useHistory} from "react-router-dom";
 import CartedItem from "../components/checkout/CartedItem";
 import {v4 as uuidv4} from 'uuid';
 import axios from "axios";
+import {flushCart} from "../store/actions/ProductActions";
 
 const Checkout: React.FC = () => {
     const cartedItems: ICartedItem[] = useSelector(((state: RootState) => state.cartReducer.cartedItems))
     const [tot, setTot] = useState<number>(0);
     const [isPlaceOrdering, setIsPlaceOrdering] = useState<boolean>(false);
     const dCharge = 0;
+    const dispatch = useDispatch();
 
     useEffect(() => {
             setTot(cartedItems.reduce((sum: number, cItem: ICartedItem) =>
@@ -52,6 +54,7 @@ const Checkout: React.FC = () => {
          * create order object and save in database.
          *
          */
+        //TODO: ADD customer name, and hard coded data.
         setIsPlaceOrdering(true);
         axios.post(process.env.REACT_APP_BACKEND_STARTING_URL + 'place-order',
             {
@@ -76,6 +79,7 @@ const Checkout: React.FC = () => {
                 console.log(error);
             }).then(function () {
             setIsPlaceOrdering(false);
+            dispatch(flushCart())
         })
 
         //-------------------------------

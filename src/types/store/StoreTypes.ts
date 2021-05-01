@@ -11,7 +11,7 @@ import {
     SET_CUSTOMER_LOGED,
     SET_CUSTOMER_LOG_OUT,
     RESET_SELECTED_CATEGORY,
-    ADD_ALL_PRODUCTS_FROM_DB
+    ADD_ALL_PRODUCTS_FROM_DB, FLUSH_CART
 } from "../../constants/storeConstants";
 
 
@@ -63,6 +63,9 @@ export interface RemoveFromCart {
     payload: IProduct;
 }
 
+export interface FlushCart {
+    type: typeof FLUSH_CART;
+}
 
 /**
  * Still not use Add product, Update product, Delete Product
@@ -105,4 +108,4 @@ export type OnlineStoreActionTypes =
     | SetCustomerLoggedOut
     | ResetSelectedCategory
 
-export type CartActionTypes = AddToCart | ChangeCartedQty | RemoveFromCart
+export type CartActionTypes = AddToCart | ChangeCartedQty | RemoveFromCart | FlushCart

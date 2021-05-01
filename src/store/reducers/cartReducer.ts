@@ -1,5 +1,5 @@
 import {CartActionTypes, CartState} from "../../types/store/StoreTypes";
-import {ADD_TO_CART, CHANGE_CARTED_COUNT, REMOVE_FROM_CART} from "../../constants/storeConstants";
+import {ADD_TO_CART, CHANGE_CARTED_COUNT, FLUSH_CART, REMOVE_FROM_CART} from "../../constants/storeConstants";
 import {ICartedItem} from "../../types/product";
 
 const initialState: CartState = {
@@ -32,6 +32,12 @@ export const CartReducer =
                 return {
                     ...state,
                     cartedItems: state.cartedItems.filter((cItem: ICartedItem) => cItem.product !== action.payload)
+                }
+
+            case FLUSH_CART:
+                return {
+                    ...state,
+                    cartedItems: []
                 }
 
             default:
