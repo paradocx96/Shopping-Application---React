@@ -1,10 +1,9 @@
-import React, {ChangeEvent, FormEvent, useState} from 'react';
-import {Button, CardImg, Col, Container, Form, Row, Spinner} from "react-bootstrap";
+import React, {FormEvent, useState} from 'react';
+import {Button, Col, Container, Form, Row, Spinner} from "react-bootstrap";
 import {useHistory} from "react-router-dom";
 import axios from "axios";
 import {BASE_URL} from "../constants/baseUrl";
 import {v4 as uuidv4} from 'uuid';
-import ImageUpload from "../components/dashboard/ImageUpload";
 import ImgUpload from "../components/dashboard/ImageUpload";
 
 const CreateProduct: React.FC = () => {
@@ -87,7 +86,10 @@ const CreateProduct: React.FC = () => {
                     <Col>
                         <div className="create-product p-3">
                             <h2 className="pt-5">Create Product</h2>
-                            <ImgUpload setImageUrl={setImageUrl} setIsImageUploading={setIsUploadingImage}/>
+
+                            <ImgUpload setImageUrl={setImageUrl} imageUrl={imageUrl}
+                                       setIsImageUploading={setIsUploadingImage}/>
+
                             <Form noValidate validated={validated} onSubmit={handleOnSubmit}>
 
                                 <Form.Group controlId="formBasicName">

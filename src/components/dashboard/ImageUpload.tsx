@@ -9,16 +9,16 @@ import axios from "axios";
 
 type ImgCropProps = {
     setImageUrl: (url: string) => void;
+    imageUrl: string | null
     setIsImageUploading: (stateOfButton: boolean) => void;
 }
 
 const ImgUpload: React.FC<ImgCropProps> = (props) => {
-    const {setImageUrl, setIsImageUploading} = props;
+    const {setImageUrl, imageUrl, setIsImageUploading} = props;
     const [src, setSrc] = useState<any>(null);
     const [cropper, setCropper] = useState<any>();
     const [isVisible, setIsVisible] = useState(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [uploadedImg, setUploadedImg] = useState(null);
 
     const onChange = (e: any) => {
         setIsVisible(true);
@@ -66,7 +66,7 @@ const ImgUpload: React.FC<ImgCropProps> = (props) => {
             .then(function (response) {
 
                 setImageUrl(response.data.secure_url);
-                setUploadedImg(response.data.secure_url);
+
             })
             .catch(function (error) {
                 console.log(error);
@@ -85,10 +85,10 @@ const ImgUpload: React.FC<ImgCropProps> = (props) => {
                 <div className="text-center pt-2"><img width={270} src={image} alt='....'/><p>Loading...</p></div>
             }
             {
-                !isLoading && !isVisible && uploadedImg &&
+                !isLoading && !isVisible && imageUrl &&
                 <div className="text-center pt-2"><CardImg style={{width: '270px'}} className="image-preview py-2"
                                                            variant="top"
-                                                           src={uploadedImg ? uploadedImg + "" : placeHolderImg}/></div>
+                                                           src={imageUrl ? imageUrl + "" : placeHolderImg}/></div>
             }
 
             <input className="pb-3" type="file" onChange={(e) => onChange(e)} accept="image/*"/>
