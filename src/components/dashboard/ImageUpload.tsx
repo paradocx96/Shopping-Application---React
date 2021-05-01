@@ -82,7 +82,7 @@ const ImgUpload: React.FC<ImgCropProps> = (props) => {
                                                            src={imageUrl ? imageUrl + "" : placeHolderImg}/></div>
             }
 
-            <input className="pb-3" type="file" onChange={(e) => onChange(e)} accept="image/*"/>
+            <input className="pb-2" type="file" onChange={(e) => onChange(e)} accept="image/*"/>
             <br/>
             {
                 isVisible &&

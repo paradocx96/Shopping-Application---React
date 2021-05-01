@@ -68,6 +68,7 @@ const CreateProduct: React.FC = () => {
                         input => (input.value = "")
                     );
                     setIsCreatingProduct(false);
+                    window.location.reload();
                 });
         } catch (err) {
             alert(err);
@@ -92,6 +93,11 @@ const CreateProduct: React.FC = () => {
 
                             <ImgUpload setImageUrl={setImageUrl} imageUrl={imageUrl}
                                        setIsImageUploading={setIsUploadingImage}/>
+
+                            {
+                                !imageUrl && validated &&
+                                    <small className="text-danger d-block pb-3">This field can not be empty.</small>
+                            }
 
                             <Form noValidate validated={validated} onSubmit={handleOnSubmit}>
 
