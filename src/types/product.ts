@@ -7,7 +7,7 @@ export interface IProduct {
     sellPrice: number;
     price: number | null;
     image: string;
-    cType: string;
+    categoryType: string;
     stockQty: number;
 }
 

@@ -61,7 +61,7 @@ const DashboardItem: React.FC<dashboardItemProps> = (props) => {
                         sellPrice: sellPrice,
                         price: price,
                         image: product.image,
-                        cType: product.cType,
+                        cType: product.categoryType,
                         stockQty: stockQty
                     }
                 ).then(function (response) {
@@ -171,7 +171,7 @@ const DashboardItem: React.FC<dashboardItemProps> = (props) => {
                                       product.sellPrice.toFixed(2)}/>
                 </td>
                 <td className="pt-sm-4 tbl-col-unit-amount px-0">
-                    {product.cType}
+                    {product.categoryType}
                 </td>
                 <td className="pt-sm-4 text-right tbl-col-unit-close pt-2">
                     <NumberFormat displayType={!isUpdatable ? 'text' : 'input'} thousandSeparator={true}

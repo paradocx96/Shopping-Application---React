@@ -12,7 +12,7 @@ const CreateProduct: React.FC = () => {
     const [price, setPrice] = useState<number | null>(null);
     const [sellPrice, setSellPrice] = useState<number | null>(null);
     const [imageUrl, setImageUrl] = useState<string | null>(null);
-    const [cType, setCType] = useState<string | null>(null);
+    const [categoryType, setCategoryType] = useState<string | null>(null);
     const [stockQty, setStockQty] = useState<number | null>(null);
     const [isCreatingProduct, setIsCreatingProduct] = useState<boolean>(false);
     const [isUploadingImage, setIsUploadingImage] = useState<boolean>(false);
@@ -26,7 +26,7 @@ const CreateProduct: React.FC = () => {
             event.stopPropagation();
             setValidated(true);
 
-            if (title === null || price === null || sellPrice === null || imageUrl === null || cType === null ||
+            if (title === null || price === null || sellPrice === null || imageUrl === null || categoryType === null ||
                 stockQty === null) {
                 return;
             }
@@ -42,7 +42,7 @@ const CreateProduct: React.FC = () => {
                     sellPrice: sellPrice,
                     price: price,
                     image: imageUrl + "",
-                    cType: cType,
+                    categoryType: categoryType,
                     stockQty: stockQty
                 })
                 .then(function (response) {
@@ -58,7 +58,7 @@ const CreateProduct: React.FC = () => {
                     setPrice(null);
                     setSellPrice(null);
                     setImageUrl(null);
-                    setCType(null);
+                    setCategoryType(null);
                     setStockQty(null);
                     setValidated(false);
                     Array.from(document.querySelectorAll("input")).forEach(
@@ -104,7 +104,7 @@ const CreateProduct: React.FC = () => {
                                 <Form.Group controlId="formBasicType">
                                     <Form.Label>Product Type</Form.Label>
                                     <Form.Control as="select" defaultValue="Choose..."
-                                                  onChange={(e) => setCType(e.target.value)}>
+                                                  onChange={(e) => setCategoryType(e.target.value)}>
                                         {categories.map((val: string) => <option>{val}</option>)}
                                     </Form.Control>
                                 </Form.Group>
