@@ -1,15 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Col, Container, Row, Table} from "react-bootstrap";
+import {Button, Col, Container, Row, Spinner, Table} from "react-bootstrap";
 import NumberFormat from "react-number-format";
 import {useSelector} from "react-redux";
 import {RootState} from "../store/reducers";
 import {ICartedItem} from "../types/product";
 import {useHistory} from "react-router-dom";
 import CartedItem from "../components/checkout/CartedItem";
+import {v4 as uuidv4} from 'uuid';
+import axios from "axios";
 
 const Checkout: React.FC = () => {
     const cartedItems: ICartedItem[] = useSelector(((state: RootState) => state.cartReducer.cartedItems))
-    const [tot, setTot] = useState<number>(0)
+    const [tot, setTot] = useState<number>(0);
+    const [isPlaceOrdering, setIsPlaceOrdering] = useState<boolean>(false);
     const dCharge = 0;
 
     useEffect(() => {
@@ -18,7 +21,7 @@ const Checkout: React.FC = () => {
             );
         }, [cartedItems]
     )
-    const isLogged:boolean = useSelector(((state: RootState) => state.onlineStoreReducer.isLogged))
+    const isLogged: boolean = useSelector(((state: RootState) => state.onlineStoreReducer.isLogged))
     const history = useHistory();
     console.log(isLogged)
 
@@ -26,13 +29,57 @@ const Checkout: React.FC = () => {
      * If the user already logged navigate to payment gateway.
      * Otherwise navigate for login page.
      */
-    const onHandlePlaceOrder = () =>{
+    const onHandlePlaceOrder = () => {
         /*TODO: HAS TO IMPLEMENT*/
-        if(isLogged){
-            history.push('/payment');
-        }else {
-            history.push('/login');
+
+        // Otherwise return before execute those.
+
+        const orderId = "order" + uuidv4();
+
+        const getOrderList = () => {
+            return cartedItems.map((item: ICartedItem) => {
+                    return {
+                        orderId: orderId,
+                        productId: item.product.id,
+                        quantity: item.cQty
+                    }
+                }
+            );
         }
+
+        /**
+         * Deduct the stock quantity of items in database. (stock count will update);
+         * create order object and save in database.
+         *
+         */
+        setIsPlaceOrdering(true);
+        axios.post(process.env.REACT_APP_BACKEND_STARTING_URL + 'place-order',
+            {
+                orderDetail: {
+                    orderId: orderId,
+                    orderDate: new Date().toDateString(),
+                    customerName: "__CUS_NAME____",
+                    customerId: "___CUS_ID____",
+                    contactNumber: "0777123123",
+                    permanentAddress: "ADDRESS_1",
+                    deliveryAddress: "ADDRESS_2",
+                    amount: tot,
+                    paymentOption: "card"
+                },
+                orderItems: getOrderList()
+            }
+        ).then(function (response) {
+            console.log(response);
+        })
+            .catch(function (error) {
+                /* handle error.In this, just show the error */
+                console.log(error);
+            }).then(function () {
+            setIsPlaceOrdering(false);
+        })
+
+        //-------------------------------
+
     }
 
     return (
@@ -79,8 +126,12 @@ const Checkout: React.FC = () => {
                         (cartedItems.length>0)  &&
                         <Row className="m-0 mt-3">
                             <Col>
-                                <Button className="float-right custom-primary-button"  onClick={onHandlePlaceOrder}>
-                                    Place Order now
+                                <Button className="float-right custom-primary-button" onClick={onHandlePlaceOrder}
+                                        disabled={isPlaceOrdering}>Place Order now &nbsp;
+                                    {
+                                        isPlaceOrdering &&
+                                        <Spinner size="sm" role="status" aria-hidden="true" animation="border"/>
+                                    }
                                 </Button>
 
                             </Col>
