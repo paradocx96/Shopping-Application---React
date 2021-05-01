@@ -2,7 +2,6 @@ import React, {FormEvent, useState} from 'react';
 import {Button, Col, Container, Form, Row, Spinner} from "react-bootstrap";
 import {useHistory} from "react-router-dom";
 import axios from "axios";
-import {BASE_URL} from "../constants/baseUrl";
 import {v4 as uuidv4} from 'uuid';
 import ImgUpload from "../components/dashboard/ImageUpload";
 
@@ -35,7 +34,7 @@ const CreateProduct: React.FC = () => {
              * Create new product in database.
              */
             setIsCreatingProduct(true);
-            axios.post(BASE_URL + 'add-product',
+            axios.post(process.env.REACT_APP_BACKEND_STARTING_URL + 'add-product',
                 {
                     id: "product" + uuidv4(),
                     title: title,

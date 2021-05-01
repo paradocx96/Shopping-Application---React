@@ -6,7 +6,6 @@ import {RootState} from "../../store/reducers";
 import {IProduct} from "../../types/product";
 import axios from "axios";
 import {addAllProductsFromDb} from "../../store/actions/ProductActions";
-import {BASE_URL} from "../../constants/baseUrl";
 
 const ProductList: React.FC = () => {
     const products: IProduct[] = useSelector((state: RootState) => state.onlineStoreReducer.products);
@@ -23,7 +22,7 @@ const ProductList: React.FC = () => {
     }
 
     useEffect(() => {
-        axios.get(BASE_URL + 'get-all-product')
+        axios.get(process.env.REACT_APP_BACKEND_STARTING_URL + 'get-all-product')
             .then(function (response) {
                 dispatch(addAllProductsFromDb(response.data));
             })

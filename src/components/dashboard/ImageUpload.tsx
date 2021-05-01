@@ -56,21 +56,12 @@ const ImgUpload: React.FC<ImgCropProps> = (props) => {
 
         const fileCropped = await new File([convertDataUrlToBlob(cropper.getCroppedCanvas().toDataURL())],
             "croppedImg.jpeg", {type: `image/jpeg`});
-
         const data = new FormData();
         data.append('file', fileCropped);
-
-        data.append('upload_preset', 'sliit_shoping_application_react')
-
-        axios.post("https://api.cloudinary.com/v1_1/djvpvdfqp/image/upload", data)
-            .then(function (response) {
-
-                setImageUrl(response.data.secure_url);
-
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
+        data.append('upload_preset', '' + process.env.REACT_APP_IMAGE_UPLOAD_PRESET_VAL)
+        axios.post(process.env.REACT_APP_IMAGE_UPLOADING_API_URL + "image/upload", data)
+            .then(function (response) {setImageUrl(response.data.secure_url);})
+            .catch(function (error) {console.log(error);})
             .then(function () {
                 setIsImageUploading(false);
                 setIsLoading(false);

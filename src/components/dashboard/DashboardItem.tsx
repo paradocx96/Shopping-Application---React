@@ -4,7 +4,6 @@ import NumberFormat from "react-number-format";
 import {IProduct} from "../../types/product";
 import Swal from 'sweetalert2';
 import axios from "axios";
-import {BASE_URL} from "../../constants/baseUrl";
 
 type dashboardItemProps = {
     index: number
@@ -51,10 +50,12 @@ const DashboardItem: React.FC<dashboardItemProps> = (props) => {
             reverseButtons: true
         }).then((result) => {
             if (result.isConfirmed) {
-                //TODO:Update qty product from mongodb db. Recall products form backend into redux store.
+                /**
+                 *   Update qty product from the database.
+                 */
                 setIsDisableButtons(true);
                 setIsUpdating(true);
-                axios.put(BASE_URL + 'update-product',
+                axios.put(process.env.REACT_APP_BACKEND_STARTING_URL + 'update-product',
                     {
                         id: product.id,
                         title: product.title,
@@ -114,17 +115,19 @@ const DashboardItem: React.FC<dashboardItemProps> = (props) => {
             reverseButtons: true
         }).then((result) => {
             if (result.isConfirmed) {
-                //TODO:Delete product from mongodb db. Recall products form backend into redux store.
+                /**
+                 * Delete product from the database.
+                 */
                 setIsDisableButtons(true);
                 setIsDeleting(true);
-                axios.get(BASE_URL + 'delete-product/' + product.id)
+                axios.get(process.env.REACT_APP_BACKEND_STARTING_URL + 'delete-product/' + product.id)
                     .then(function (response) {
                         console.log(response);
                     })
                     .catch(function (error) {
                         /* handle error.In this, just show the error */
                         console.log(error);
-                    }).then(function (){
+                    }).then(function () {
                     setIsDisableButtons(false);
                     setIsDeleting(false);
                 });

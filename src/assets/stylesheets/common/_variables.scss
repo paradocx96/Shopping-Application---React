@@ -2,6 +2,7 @@ $isBorderRadius: true;
 
 .background-color-1 {
   background-color: var(--background-primary-color);
+  min-height: 100vh;
 }
 
 .custom-primary-button {

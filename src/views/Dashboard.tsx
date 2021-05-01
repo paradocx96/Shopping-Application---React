@@ -6,7 +6,6 @@ import {RootState} from "../store/reducers";
 import DashboardItem from "../components/dashboard/DashboardItem";
 import {useHistory} from "react-router-dom";
 import axios from "axios";
-import {BASE_URL} from "../constants/baseUrl";
 import {addAllProductsFromDb} from "../store/actions/ProductActions";
 
 /**
@@ -21,7 +20,7 @@ const DashBoard: React.FC = () => {
     const [isDisableButtons, setIsDisableButtons] = useState(false);
 
     useEffect(() => {
-        axios.get(BASE_URL + 'get-all-product')
+        axios.get(process.env.REACT_APP_BACKEND_STARTING_URL + 'get-all-product')
             .then(function (response) {
                 dispatch(addAllProductsFromDb(response.data));
             })
@@ -32,7 +31,7 @@ const DashBoard: React.FC = () => {
             .then(function () {
                 /* always executed */
             });
-    },[])
+    }, [isDisableButtons])
 
     return (
         <div className='dashboard-page background-color-1'>
