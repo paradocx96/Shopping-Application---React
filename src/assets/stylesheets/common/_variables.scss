@@ -13,7 +13,7 @@ $isBorderRadius: true;
   margin-bottom: 0.4em;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
   background-color: var(--button-primary-bg-color) !important;
-  color: var(--button-primary-text-color);
+  color: var(--button-primary-text-color) !important;
   border-color: var(--button-primary-bg-color) !important;
 
   &:hover {
