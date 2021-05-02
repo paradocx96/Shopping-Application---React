@@ -31,7 +31,7 @@ const HeaderBanner: React.FC = () => {
         <React.Fragment>
             <Row className="m-0 header-banner-area  pr-md-5 ">
                 <Col xs={9} sm={7} md={8} lg={9} xl={10} className="pl-3 pl-lg-5 pl-md-4">
-                    <Link to="/" className="float-left logo-text pt-1 pl-lg-3 negation">LOGO</Link>
+                    <Link to="/" className="float-left logo-text pt-1 pl-lg-3 negation">E-SHOP</Link>
                 </Col>
                 <Col xs={3} sm={5} md={4} lg={3} xl={2}>
                     <OverlayTrigger

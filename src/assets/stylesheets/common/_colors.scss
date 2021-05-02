@@ -1,34 +1,34 @@
 :root{
-  --text-primary-color: #1a1818;
-  --text-primary-color-hover: black;
-  --text-secondary-color: #5f5d5d;
-  --background-primary-color: #f0fcff;
-  --background-secondary-color: #daf8ff;
-  --button-primary-bg-color: #025b02;
-  --button-primary-bg-hover-color: #044304;
-  --button-primary-text-color: #fff;
+  --text-primary-color: black;
+  --text-primary-color-hover: #1d1b1b;
+  --text-secondary-color:  #5f5f5f;
+  --background-primary-color: white;
+  --background-secondary-color: #0046be;
+  --button-primary-bg-color: #ffe000;
+  --button-primary-bg-hover-color: #ffbf00;
+  --button-primary-text-color: black;
   --border-primary-color:gray;
-  --link-text-color: blue;
-  --link-text--hover-color: #0d0d86;
-  --footer-bg-color:  #1a1818;
-  --footer-text-color: lightgray;
-  --footer-text-hover-color: white;
+  --link-text-color: lightgray;
+  --link-text--hover-color: white;
+  --footer-bg-color:  white;
+  --footer-text-color: #0457c8;
+  --footer-text-hover-color: #097fb5;
 }
 
 
 .dark{
   --text-primary-color: #c3bebe;
   --text-primary-color-hover: white;
-  --text-secondary-color: #676565;
+  --text-secondary-color: #043288;
   --background-primary-color: #1a0d30;
   --background-secondary-color: #403e48;
-  --button-primary-bg-color: #25a925;
-  --button-primary-bg-hover-color: #168616;
-  --button-primary-text-color: #fff;
+  --button-primary-bg-color:  #ffe000;
+  --button-primary-bg-hover-color:  #ffe000;
+  --button-primary-text-color: black;
   --border-primary-color:gray;
-  --link-text-color: #c9cf0c;
-  --link-text--hover-color: #bea214;
+  --link-text-color:  #ffe000;
+  --link-text--hover-color:  #ffe000;
   --footer-bg-color: #1f1a1a;
-  --footer-text-color: lightgray;
-  --footer-text-hover-color: white;
+  --footer-text-color: #0457c8;
+  --footer-text-hover-color: #097fb5;
 }
