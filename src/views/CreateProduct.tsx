@@ -76,7 +76,7 @@ const CreateProduct: React.FC = () => {
     }
 
     return (
-        <div className='new-product-dev m-auto'>
+        <div className='new-product-dev m-auto  pb-5'>
             <Container>
                 <Row>
                     <Col>

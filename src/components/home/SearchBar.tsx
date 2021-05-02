@@ -42,7 +42,7 @@ const SearchBar: React.FC = () => {
     }
 
     return (
-        <Container>
+        <Container className="pt-4">
             <Row>
                 <Col sm={{span: 10, offset: 1}} md={{span: 8, offset: 2}}>
                     <Form onSubmit={handleOnSubmit}>

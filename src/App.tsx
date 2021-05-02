@@ -7,6 +7,7 @@ import Home from "./views/Home";
 import Checkout from "./views/Checkout";
 import DashBoard from "./views/Dashboard";
 import CreateProduct from "./views/CreateProduct";
+import Footer from './layout/Footer';
 
 function App() {
     return (
@@ -28,6 +29,7 @@ function App() {
                     </Route>
 
                 </Switch>
+                <Footer/>
             </BrowserRouter>
         </div>
     );

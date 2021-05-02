@@ -31,7 +31,7 @@ const DashBoard: React.FC = () => {
     }, [isDisableButtons])
 
     return (
-        <div className='dashboard-page background-color-1'>
+        <div className='dashboard-page background-color-1  pb-4'>
             <Container>
                 <Table responsive className="table-data">
                     <thead>
