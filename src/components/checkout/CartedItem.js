@@ -6,7 +6,7 @@ import {changeCartedCount, removeFromCart} from "../../store/actions/ProductActi
 
 
 function CartedItem(props) {
-    const {index, cartedItem} = props;
+    const {index, cartedItem, setIsStateChange, isStateChange} = props;
     const [qty, setQty] = useState(cartedItem.cQty);
     let quantity;
     const dispatch = useDispatch();
@@ -14,14 +14,17 @@ function CartedItem(props) {
     /**
      * Remove the product from the redux store cart.
      */
-    const onHandelRemove = () => dispatch(removeFromCart(cartedItem.product));
+    const onHandelRemove = () => {
+        dispatch(removeFromCart(cartedItem.product));
+        setIsStateChange(!isStateChange);
+    }
 
     /**
      * Increase the carted quantity in redux store.
      */
     const increaseQty = () => {
         qty === cartedItem.product.stockQty ? quantity = qty : quantity = qty + 1
-        changeCartedCountOfProduct(quantity)
+        changeCartedCountOfProduct(quantity);
     }
 
     /**
@@ -37,7 +40,8 @@ function CartedItem(props) {
      * @param quantity
      */
     const changeCartedCountOfProduct = (quantity) => {
-        dispatch(changeCartedCount({product: cartedItem.product, cQty: quantity}))
+        dispatch(changeCartedCount({product: cartedItem.product, cQty: quantity}));
+        setIsStateChange(!isStateChange);
     }
 
     useEffect(() => {

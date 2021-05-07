@@ -9,13 +9,15 @@ export const CartReducer =
     (state= initialState, action) => {
         switch (action.type) {
             case ADD_TO_CART:
+                console.log(action.payload)
                 return {...state, cartedItems: [...state.cartedItems, action.payload]}
 
             case CHANGE_CARTED_COUNT:
+                console.log(action.payload)
                 return {
                     ...state,
                     cartedItems: state.cartedItems.map((cartedItem) => {
-                        if (cartedItem.product !== action.payload.product) {
+                        if (cartedItem.product.id !== action.payload.product.id) {
                             // This isn't the item we care about - keep it as-is
                             return cartedItem
                         }
@@ -28,9 +30,12 @@ export const CartReducer =
                 }
 
             case REMOVE_FROM_CART:
+                console.log(action.payload);
+                console.log("_________________");
+                console.log(state.cartedItems);
                 return {
                     ...state,
-                    cartedItems: state.cartedItems.filter((cItem) => cItem.product !== action.payload)
+                    cartedItems: state.cartedItems.filter((cItem) => cItem.product.id !== action.payload.id)
                 }
 
             case FLUSH_CART:

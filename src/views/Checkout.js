@@ -1,32 +1,33 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Col, Container, Row, Spinner, Table} from "react-bootstrap";
 import NumberFormat from "react-number-format";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import CartedItem from "../components/checkout/CartedItem";
 import {v4 as uuidv4} from 'uuid';
 import axios from "axios";
 import {flushCart} from "../store/actions/ProductActions";
+import {configureStore} from "../store";
 
 /**
  * Render checkout page.
  * @constructor
  */
 function Checkout() {
-    // eslint-disable-next-line no-undef
-    // const cartedItems = useSelector(((statee) => state.cartReducer.cartedItems));
-    const cartedItems = [];
+    // const cartedItems = useSelector(((state) => state.cartReducer.cartedItems));
+    const [cartedItems, setCartedItems] = useState([]);
     const [tot, setTot] = useState(0);
     const [isPlaceOrdering, setIsPlaceOrdering] = useState(false);
     const dCharge = 0;
+    const [isStateChange, setIsStateChange] = useState(false);
     const dispatch = useDispatch();
 
     useEffect(() => {
-            setTot(cartedItems.reduce((sum, cItem) =>
-                sum + cItem.cQty * cItem.product.sellPrice, 0)
-            );
-        }, [cartedItems]
-    )
-    const isLogged = useSelector(((state) => state.onlineStoreReducer.isLogged))
+        console.log("Update cart");
+        setCartedItems(configureStore().getState().cartReducer.cartedItems);
+        setTot(configureStore().getState().cartReducer.cartedItems.reduce((sum, cItem) =>
+            sum + cItem.cQty * cItem.product.sellPrice, 0)
+        );
+    }, [isStateChange])
 
     /**
      * If the user already logged navigate to payment gateway.
@@ -103,7 +104,8 @@ function Checkout() {
                         <tbody>
                         {
                             cartedItems.map((product, index) =>
-                                <CartedItem key={index} index={index} cartedItem={product}/>
+                                <CartedItem key={index} index={index} cartedItem={product} isStateChange={isStateChange}
+                                            setIsStateChange={setIsStateChange}/>
                             )}
                         </tbody>
                     </Table>

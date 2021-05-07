@@ -6,17 +6,19 @@ import {addToCart, changeCartedCount} from "../../store/actions/ProductActions";
 import {RootState} from "../../store/reducers";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import {configureStore} from "../../store";
 
 AOS.init();
 
 function Product(props) {
     const {product} = props;
-    const cartedItems = [];
-    const cartedItem = cartedItems.find(cartedItem => cartedItem.product.title === product.title);
+    const [cartedItems, setCartedItems] = useState([]);
+    const cartedItem = cartedItems.find(cartedItem => cartedItem.product.id === product.id);
     const dispatch = useDispatch();
     const [qty, setQty] = useState(cartedItem === undefined ? 1 : cartedItem.cQty);
 
     useEffect(() => {
+        setCartedItems(configureStore().getState().cartReducer.cartedItems);
             setQty(cartedItem === undefined ? 1 : cartedItem.cQty);
         }, [cartedItems]
     )
@@ -38,7 +40,8 @@ function Product(props) {
     const onHandelAddToCart = (event) => {
         event.preventDefault();
         event.stopPropagation();
-        dispatch(addToCart({product: product, cQty: qty}))
+        dispatch(addToCart({product: product, cQty: qty}));
+        console.log("ADD to cart")
     }
 
     return (
