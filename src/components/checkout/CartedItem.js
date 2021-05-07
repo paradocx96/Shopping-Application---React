@@ -45,7 +45,6 @@ function CartedItem(props) {
     }
 
     useEffect(() => {
-            console.log(index);
             setQty(cartedItem.cQty);
         }, [cartedItem]
     )

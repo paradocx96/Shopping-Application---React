@@ -1,20 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {Col, Container, Form, FormControl, Row} from "react-bootstrap";
-import {useDispatch} from "react-redux";
-import {searchProduct} from "../../store/actions/ProductActions";
 import Product from "./Product";
 import {configureStore} from "../../store";
 
-// import {RootState} from "../../store/reducers";
 
 function SearchBar() {
-    // const {products, searchTerm} = useSelector((state) => state.onlineStoreReducer);
     const [products, setProducts] = useState([]);
-
     const [search, setSearch] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
 
-    const dispatch = useDispatch();
 
     useEffect(() => {
         setProducts(configureStore().getState().onlineStoreReducer.products);

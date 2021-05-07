@@ -6,10 +6,7 @@ import axios from "axios";
 import {addAllProductsFromDb} from "../../store/actions/ProductActions";
 import {configureStore} from "../../store";
 
-// import {RootState} from "../../store/reducers";
-
 function ProductList() {
-    // const {products, searchTerm} = useSelector((state) => state.onlineStoreReducer);
     const [isStateChange, setIsStateChange] = useState(false);
     const [products, setProducts] = useState([]);
     const dispatch = useDispatch();

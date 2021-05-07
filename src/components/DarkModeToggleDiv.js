@@ -1,26 +1,16 @@
-import React, {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-// import {RootState} from "../store/reducers";
-import {setDarkTheme} from "../store/actions/CommonStoreActions";
+import React, {useState} from "react";
 import DarkModeToggle from "react-dark-mode-toggle";
 
 function DarkModeToggleDiv() {
-    // const isDark = useSelector((state) => state.onlineStoreReducer.isDarkTheme);
-    const isDark = true;
-    useEffect(() => {
-        if (isDark) {
-            document.documentElement.classList.add('dark');
-            return
-        }
-        document.documentElement.classList.remove('dark');
-    }, [isDark])
+    const [isDark, setIsDark] = useState(false);
 
-    const dispatch = useDispatch();
     const handleOnThemeChange = () => {
         if (isDark) {
-            dispatch(setDarkTheme(false));
+            setIsDark(false);
+            document.body.classList.remove("dark");
         } else {
-            dispatch(setDarkTheme(true));
+            setIsDark(true);
+            document.body.classList.add("dark");
         }
     }
 

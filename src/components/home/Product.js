@@ -89,13 +89,8 @@ function Product(props) {
                     <Row className="m-0">
                         <Col xs={5} className="pl-0 pr-2">
                             <input type="number" className="count-field text-left pl-lg-3"
-                                onChange={(e) => setQty(Number(e.target.value))}
-                                   // onChange={event => console.log(event.target.value)}
-                                   placeholder=""
-                                value={qty ? qty : ''}
-                                   // defaultValue={qty}
-                                   min="1"
-                                   max={product.stockQty}/>
+                                   onChange={(e) => setQty(Number(e.target.value))}
+                                   placeholder="" value={qty ? qty : ''} min="1" max={product.stockQty}/>
                         </Col>
                         <Col xs={7} className="px-0">
                             {
