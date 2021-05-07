@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Card, Col, Form, Row} from "react-bootstrap";
 import NumberFormat from 'react-number-format';
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {addToCart, changeCartedCount} from "../../store/actions/ProductActions";
-import {RootState} from "../../store/reducers";
+// import {RootState} from "../../store/reducers";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import {configureStore} from "../../store";
@@ -11,16 +11,18 @@ import {configureStore} from "../../store";
 AOS.init();
 
 function Product(props) {
-    const {product} = props;
+    const {product, setIsStateChange, isStateChange} = props;
     const [cartedItems, setCartedItems] = useState([]);
     const cartedItem = cartedItems.find(cartedItem => cartedItem.product.id === product.id);
     const dispatch = useDispatch();
     const [qty, setQty] = useState(cartedItem === undefined ? 1 : cartedItem.cQty);
+    console.log(qty);
 
     useEffect(() => {
         setCartedItems(configureStore().getState().cartReducer.cartedItems);
-            setQty(cartedItem === undefined ? 1 : cartedItem.cQty);
-        }, [cartedItems]
+        setQty(cartedItem === undefined ? 1 : cartedItem.cQty);
+
+        }, []
     )
 
     /**
@@ -30,7 +32,8 @@ function Product(props) {
     const onHandelUpdate = (event) => {
         event.preventDefault();
         event.stopPropagation();
-        dispatch(changeCartedCount({product: product, cQty: qty}))
+        dispatch(changeCartedCount({product: product, cQty: qty}));
+        setIsStateChange(!isStateChange);
     }
 
     /**
@@ -41,7 +44,7 @@ function Product(props) {
         event.preventDefault();
         event.stopPropagation();
         dispatch(addToCart({product: product, cQty: qty}));
-        console.log("ADD to cart")
+
     }
 
     return (
@@ -53,6 +56,7 @@ function Product(props) {
                 </Row>
                 <Row className="m-0">
                     <Col className="p-0 m-0"><Card.Title className="title pt-1">{product.title}</Card.Title></Col>
+                    {/*<Col className="p-0 m-0"><Card.Title className="title pt-1">{product.title}</Card.Title></Col>*/}
                 </Row>
 
                 {product.price !== null && (
@@ -84,9 +88,13 @@ function Product(props) {
                     <Row className="m-0">
                         <Col xs={5} className="pl-0 pr-2">
                             <input type="number" className="count-field text-left pl-lg-3"
-                                   onChange={(e) => setQty(Number(e.target.value))}
-                                   placeholder="" value={qty ? qty : ''}
-                                   min="1" max={product.stockQty}/>
+                                onChange={(e) => setQty(Number(e.target.value))}
+                                   // onChange={event => console.log(event.target.value)}
+                                   placeholder=""
+                                value={qty ? qty : ''}
+                                //    defaultValue={qty}
+                                   min="1"
+                                   max={product.stockQty}/>
                         </Col>
                         <Col xs={7} className="px-0">
                             {

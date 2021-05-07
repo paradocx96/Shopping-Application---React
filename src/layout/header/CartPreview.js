@@ -5,6 +5,7 @@ import CartPreviewItem from "./CartPreviewItem";
 // import {useSelector} from "react-redux";
 // import {RootState} from "../../store/reducers";
 import NumberFormat from "react-number-format";
+import {configureStore} from "../../store";
 
 /**
  * Cart icon popup box
@@ -23,7 +24,7 @@ function CartPreview() {
     const [tot, setTot] = useState(0);
     const discountPercentage = 0;
     // const cartedItems = useSelector((state) => state.cartReducer.cartedItems);
-    const cartedItems = [];
+    const [cartedItems, setCartedItems] = useState([]);
 
     /**
      * Get the count of carted items.
@@ -34,7 +35,8 @@ function CartPreview() {
         cartedItems.reduce((sum, cItem) => sum + cItem.cQty * cItem.product.sellPrice, 0);
 
     useEffect(() => {
-            setTot(subtotal);
+        setCartedItems(configureStore().getState().cartReducer.cartedItems);
+        setTot(subtotal);
         }, [cartedItems]
     )
 

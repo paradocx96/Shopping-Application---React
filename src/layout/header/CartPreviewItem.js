@@ -13,7 +13,10 @@ import {removeFromCart} from "../../store/actions/ProductActions";
 function CartPreviewItem(props) {
     const {product, cartedQty} = props;
     const dispatch = useDispatch();
-    const onHandelRemove = () => dispatch(removeFromCart(product));
+    const onHandelRemove = () => {
+        dispatch(removeFromCart(product));
+        window.location.reload();
+    }
 
     return (
         <React.Fragment>

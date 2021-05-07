@@ -10,6 +10,7 @@ import {configureStore} from "../../store";
 
 function ProductList() {
     // const {products, searchTerm} = useSelector((state) => state.onlineStoreReducer);
+    const [isStateChange, setIsStateChange] = useState(false);
     const [products, setProducts] = useState([]);
     const dispatch = useDispatch();
 
@@ -34,7 +35,8 @@ function ProductList() {
     const renderProducts = () => {
         return (
             products.map((product, index) =>
-                <Product key={index} product={product}/>)
+                <Product key={index} product={product} isStateChange={isStateChange}
+                         setIsStateChange={setIsStateChange}/>)
         );
     }
 

@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, Col, OverlayTrigger, Popover, Row} from 'react-bootstrap';
 import {Link, useHistory} from 'react-router-dom'
 import CartPreview from "./CartPreview";
+import {configureStore} from "../../store";
 // import {useSelector} from "react-redux";
 
 
@@ -20,7 +21,7 @@ function HeaderBanner() {
     }
 
     // const cartedItems = useSelector((state) => state.cartReducer.cartedItems);
-    const cartedItems = [];
+    const cartedItems =  configureStore().getState().cartReducer.cartedItems;
 
     /**
      * Get the count of carted items.
