@@ -6,7 +6,7 @@ import thunkMiddleware from "redux-thunk";
 
 const STORE_STORAGE = 'shopping-application';
 
-export const configureStore = (preloadedState) => {
+export const configureStore = () => {
     let persistedState = {};
 
     const localStoreState = localStorage.getItem(STORE_STORAGE);
@@ -21,7 +21,7 @@ export const configureStore = (preloadedState) => {
     store.subscribe(() => {
         localStorage.setItem(STORE_STORAGE, JSON.stringify(store.getState()));
     });
-
+    // console.log(store.getState())
     return store;
 };
 

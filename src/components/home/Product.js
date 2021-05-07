@@ -11,10 +11,10 @@ AOS.init();
 
 function Product(props) {
     const {product} = props;
-    const cartedItems = useSelector((state) => state.cartReducer.cartedItems);
+    const cartedItems = [];
     const cartedItem = cartedItems.find(cartedItem => cartedItem.product.title === product.title);
     const dispatch = useDispatch();
-    const [qty, setQty] = useState < number > (cartedItem === undefined ? 1 : cartedItem.cQty);
+    const [qty, setQty] = useState(cartedItem === undefined ? 1 : cartedItem.cQty);
 
     useEffect(() => {
             setQty(cartedItem === undefined ? 1 : cartedItem.cQty);

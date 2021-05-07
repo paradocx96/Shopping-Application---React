@@ -13,7 +13,8 @@ import {flushCart} from "../store/actions/ProductActions";
  */
 function Checkout() {
     // eslint-disable-next-line no-undef
-    const cartedItems = useSelector(((statee) => state.cartReducer.cartedItems))
+    // const cartedItems = useSelector(((statee) => state.cartReducer.cartedItems));
+    const cartedItems = [];
     const [tot, setTot] = useState(0);
     const [isPlaceOrdering, setIsPlaceOrdering] = useState(false);
     const dCharge = 0;

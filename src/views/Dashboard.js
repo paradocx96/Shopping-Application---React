@@ -1,23 +1,26 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Container, Table} from "react-bootstrap";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import DashboardItem from "../components/dashboard/DashboardItem";
 import {useHistory} from "react-router-dom";
 import axios from "axios";
 import {addAllProductsFromDb} from "../store/actions/ProductActions";
+import {configureStore} from "../store";
 
 /**
  * Show all product list for admin.
  * @constructor
  */
 function DashBoard() {
-    const products = useSelector((state) => state.onlineStoreReducer.products);
+    // const products = useSelector((state) => state.getState);
+    const [products, setProducts] = useState([]);
     const history = useHistory();
     const onHandelCreateProduct = () => history.push('/create-product');
     const dispatch = useDispatch();
     const [isDisableButtons, setIsDisableButtons] = useState(false);
 
     useEffect(() => {
+        setProducts(configureStore().getState().onlineStoreReducer.products);
         axios.get(process.env.REACT_APP_BACKEND_STARTING_URL + 'get-all-product')
             .then(function (response) {
                 dispatch(addAllProductsFromDb(response.data));
@@ -25,7 +28,9 @@ function DashBoard() {
             .catch(function (error) {
                 /* handle error.In this, just show the error */
                 console.log(error);
-            });
+            }).then(function (){
+            setProducts(configureStore().getState().onlineStoreReducer.products);
+        })
     }, [isDisableButtons])
 
     return (

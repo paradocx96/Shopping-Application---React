@@ -1,14 +1,32 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import Product from "./Product";
 import {Container, Row} from "react-bootstrap";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../store/reducers";
+import {useDispatch} from "react-redux";
 import axios from "axios";
 import {addAllProductsFromDb} from "../../store/actions/ProductActions";
+import {configureStore} from "../../store";
+
+// import {RootState} from "../../store/reducers";
 
 function ProductList() {
-    const products = useSelector((state) => state.onlineStoreReducer.products);
+    // const {products, searchTerm} = useSelector((state) => state.onlineStoreReducer);
+    const [products, setProducts] = useState([]);
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        setProducts(configureStore().getState().onlineStoreReducer.products);
+        axios.get(process.env.REACT_APP_BACKEND_STARTING_URL + 'get-all-product')
+            .then(function (response) {
+                dispatch(addAllProductsFromDb(response.data));
+                console.log(response.data);
+            })
+            .catch(function (error) {
+                /* handle error.In this, just show the error */
+                console.log(error);
+            }).then(function () {
+            setProducts(configureStore().getState().onlineStoreReducer.products);
+        })
+    }, [])
 
     /**
      * Render the product from the redux store.
@@ -20,19 +38,6 @@ function ProductList() {
         );
     }
 
-    useEffect(() => {
-        axios.get(process.env.REACT_APP_BACKEND_STARTING_URL + 'get-all-product')
-            .then(function (response) {
-                dispatch(addAllProductsFromDb(response.data));
-            })
-            .catch(function (error) {
-                /* handle error.In this, just show the error */
-                console.log(error);
-            })
-            .then(function () {
-                /* always executed */
-            });
-    },[])
 
     return (
         <Container>

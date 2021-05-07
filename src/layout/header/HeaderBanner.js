@@ -2,7 +2,7 @@ import React from 'react';
 import {Button, Col, OverlayTrigger, Popover, Row} from 'react-bootstrap';
 import {Link, useHistory} from 'react-router-dom'
 import CartPreview from "./CartPreview";
-import {useSelector} from "react-redux";
+// import {useSelector} from "react-redux";
 
 
 /**
@@ -19,7 +19,8 @@ function HeaderBanner() {
         history.push('/checkout')
     }
 
-    const cartedItems = useSelector((state) => state.cartReducer.cartedItems);
+    // const cartedItems = useSelector((state) => state.cartReducer.cartedItems);
+    const cartedItems = [];
 
     /**
      * Get the count of carted items.

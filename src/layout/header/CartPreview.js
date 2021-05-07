@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {Button, Col, Container, Row} from "react-bootstrap";
 import {useHistory} from "react-router-dom";
 import CartPreviewItem from "./CartPreviewItem";
-import {useSelector} from "react-redux";
-import {RootState} from "../../store/reducers";
+// import {useSelector} from "react-redux";
+// import {RootState} from "../../store/reducers";
 import NumberFormat from "react-number-format";
 
 /**
@@ -17,20 +17,21 @@ function CartPreview() {
      * Redirect to checkout page
      */
     const onClickCheckout = () => {
-        history.push('/checkout')
+        history.push('/checkout');
     }
 
-    const [tot, setTot] = useState(0)
+    const [tot, setTot] = useState(0);
     const discountPercentage = 0;
-    const cartedItems = useSelector((state) => state.cartReducer.cartedItems)
+    // const cartedItems = useSelector((state) => state.cartReducer.cartedItems);
+    const cartedItems = [];
 
     /**
      * Get the count of carted items.
      */
-    const countOfCartedItem = cartedItems.length
+    const countOfCartedItem = cartedItems.length;
 
     const subtotal =
-        cartedItems.reduce((sum, cItem) => sum + cItem.cQty * cItem.product.sellPrice, 0)
+        cartedItems.reduce((sum, cItem) => sum + cItem.cQty * cItem.product.sellPrice, 0);
 
     useEffect(() => {
             setTot(subtotal);
