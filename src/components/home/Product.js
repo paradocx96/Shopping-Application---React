@@ -16,14 +16,15 @@ function Product(props) {
     const cartedItem = cartedItems.find(cartedItem => cartedItem.product.id === product.id);
     const dispatch = useDispatch();
     const [qty, setQty] = useState(cartedItem === undefined ? 1 : cartedItem.cQty);
-    console.log(qty);
 
     useEffect(() => {
         setCartedItems(configureStore().getState().cartReducer.cartedItems);
-        setQty(cartedItem === undefined ? 1 : cartedItem.cQty);
-
         }, []
-    )
+    );
+
+    useEffect(() => {
+        setQty(cartedItem === undefined ? 1 : cartedItem.cQty);
+    },[cartedItem])
 
     /**
      * Change the count of the carted item in redux store.
@@ -92,7 +93,7 @@ function Product(props) {
                                    // onChange={event => console.log(event.target.value)}
                                    placeholder=""
                                 value={qty ? qty : ''}
-                                //    defaultValue={qty}
+                                   // defaultValue={qty}
                                    min="1"
                                    max={product.stockQty}/>
                         </Col>

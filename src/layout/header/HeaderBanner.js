@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Col, OverlayTrigger, Popover, Row} from 'react-bootstrap';
 import {Link, useHistory} from 'react-router-dom'
 import CartPreview from "./CartPreview";
@@ -20,14 +20,6 @@ function HeaderBanner() {
         history.push('/checkout')
     }
 
-    // const cartedItems = useSelector((state) => state.cartReducer.cartedItems);
-    const cartedItems =  configureStore().getState().cartReducer.cartedItems;
-
-    /**
-     * Get the count of carted items.
-     */
-    const countOfCartedItem = cartedItems.length
-
     return (
         <React.Fragment>
             <Row className="m-0 header-banner-area  pr-md-5 ">
@@ -47,7 +39,6 @@ function HeaderBanner() {
                         }
                     >
                         <div className="cart-component  pr-3">
-                            <span className="count-item float-right">{countOfCartedItem}</span>
                             <i className="feather-shopping-cart mr-3"/>
                         </div>
                     </OverlayTrigger>
