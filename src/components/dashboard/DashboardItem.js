@@ -1,30 +1,23 @@
 import React, {useState} from 'react';
 import {Button, Image, Spinner} from "react-bootstrap";
 import NumberFormat from "react-number-format";
-import {IProduct} from "../../types/product";
 import Swal from 'sweetalert2';
 import axios from "axios";
 
-type dashboardItemProps = {
-    index: number
-    product: IProduct;
-    isDisableButtons: boolean;
-    setIsDisableButtons: (value: boolean) => void;
-}
 
 /**
  * Render the product table into dashboard.
  * @param props
  * @constructor
  */
-const DashboardItem: React.FC<dashboardItemProps> = (props) => {
+function DashboardItem(props) {
     const {index, product, isDisableButtons, setIsDisableButtons} = props;
-    const [isUpdatable, setIsUpdatable] = useState<boolean>(false);
-    const [isDeleting, setIsDeleting] = useState<boolean>(false);
-    const [isUpdating, setIsUpdating] = useState<boolean>(false);
-    let sellPrice: number = product.sellPrice;
-    let price: null | number = product.price ? product.price : product.sellPrice;
-    let stockQty: null | number = product.stockQty;
+    const [isUpdatable, setIsUpdatable] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [isUpdating, setIsUpdating] = useState(false);
+    let sellPrice = product.sellPrice;
+    let price = product.price ? product.price : product.sellPrice;
+    let stockQty = product.stockQty;
 
     /**
      * Update product in database

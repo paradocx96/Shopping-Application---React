@@ -1,8 +1,8 @@
 import React from "react";
-import {Col, Container, Nav, Row} from "react-bootstrap";
+import {Col, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 
-const Footer: React.FC = ()=> {
+function Footer() {
     return (
         <div className="footer py-4 text-center">
             <Row className="m-0">

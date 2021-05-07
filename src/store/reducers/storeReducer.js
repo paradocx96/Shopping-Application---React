@@ -1,4 +1,4 @@
-import {OnlineStoreActionTypes, OnlineStoreState} from "../../types/store/StoreTypes";
+
 import {
     ADD_ALL_PRODUCTS_FROM_DB,
     ADD_PRODUCT,
@@ -6,7 +6,7 @@ import {
     SET_DARK_MODE,
 } from "../../constants/storeConstants";
 
-const initialState: OnlineStoreState = {
+const initialState = {
     products: [],
     searchTerm: '',
     isDarkTheme: true,
@@ -14,8 +14,9 @@ const initialState: OnlineStoreState = {
     selectedCategory: 'All',
 }
 
+
 export const OnlineStoreReducer =
-    (state: OnlineStoreState = initialState, action: OnlineStoreActionTypes): OnlineStoreState => {
+    (state = initialState, action) => {
         switch (action.type) {
             case ADD_ALL_PRODUCTS_FROM_DB:
                 return {...state, products: action.payload}

@@ -7,7 +7,7 @@ import HeaderBanner from "./header/HeaderBanner";
  * render Header for all pages.
  * @constructor
  */
-const Header: React.FC = () => {
+function Header() {
     return (
         <React.Fragment>
             <Row className="m-0">

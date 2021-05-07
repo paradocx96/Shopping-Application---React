@@ -5,10 +5,11 @@ import DarkModeToggleDiv from "../../components/DarkModeToggleDiv";
 import {CONTACT_NUMBER} from "../../constants/contact";
 
 /**
- * Header top part.
+ *
+ * @returns {JSX.Element}
  * @constructor
  */
-const HeaderNavBar: React.FC = () => {
+function HeaderNavBar() {
 
     return (
         <React.Fragment>

@@ -1,23 +1,19 @@
 import React from 'react';
 import NumberFormat from "react-number-format";
 import {Col, Image, Row} from "react-bootstrap";
-import {IProduct} from "../../types/product";
 import {useDispatch} from "react-redux";
 import {removeFromCart} from "../../store/actions/ProductActions";
 
-type CartPreviewItemProps = {
-    product: IProduct;
-    cartedQty: number
-}
+
 /**
  * carted item in cart preview table.
  * @param props
  * @constructor
  */
-const CartPreviewItem: React.FC<CartPreviewItemProps> = (props) => {
+function CartPreviewItem(props) {
     const {product, cartedQty} = props;
     const dispatch = useDispatch();
-    const onHandelRemove=() =>dispatch(removeFromCart(product))
+    const onHandelRemove = () => dispatch(removeFromCart(product))
 
     return (
         <React.Fragment>

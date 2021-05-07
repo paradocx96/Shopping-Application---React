@@ -3,12 +3,11 @@ import Product from "./Product";
 import {Container, Row} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store/reducers";
-import {IProduct} from "../../types/product";
 import axios from "axios";
 import {addAllProductsFromDb} from "../../store/actions/ProductActions";
 
-const ProductList: React.FC = () => {
-    const products: IProduct[] = useSelector((state: RootState) => state.onlineStoreReducer.products);
+function ProductList() {
+    const products = useSelector((state) => state.onlineStoreReducer.products);
     const dispatch = useDispatch();
 
     /**
@@ -16,7 +15,7 @@ const ProductList: React.FC = () => {
      */
     const renderProducts = () => {
         return (
-            products.map((product: IProduct, index: number) =>
+            products.map((product, index) =>
                 <Product key={index} product={product}/>)
         );
     }

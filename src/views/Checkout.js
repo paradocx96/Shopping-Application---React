@@ -2,8 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {Button, Col, Container, Row, Spinner, Table} from "react-bootstrap";
 import NumberFormat from "react-number-format";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../store/reducers";
-import {ICartedItem} from "../types/product";
 import CartedItem from "../components/checkout/CartedItem";
 import {v4 as uuidv4} from 'uuid';
 import axios from "axios";
@@ -13,20 +11,21 @@ import {flushCart} from "../store/actions/ProductActions";
  * Render checkout page.
  * @constructor
  */
-const Checkout: React.FC = () => {
-    const cartedItems: ICartedItem[] = useSelector(((state: RootState) => state.cartReducer.cartedItems))
-    const [tot, setTot] = useState<number>(0);
-    const [isPlaceOrdering, setIsPlaceOrdering] = useState<boolean>(false);
+function Checkout() {
+    // eslint-disable-next-line no-undef
+    const cartedItems = useSelector(((statee) => state.cartReducer.cartedItems))
+    const [tot, setTot] = useState(0);
+    const [isPlaceOrdering, setIsPlaceOrdering] = useState(false);
     const dCharge = 0;
     const dispatch = useDispatch();
 
     useEffect(() => {
-            setTot(cartedItems.reduce((sum: number, cItem: ICartedItem) =>
+            setTot(cartedItems.reduce((sum, cItem) =>
                 sum + cItem.cQty * cItem.product.sellPrice, 0)
             );
         }, [cartedItems]
     )
-    const isLogged: boolean = useSelector(((state: RootState) => state.onlineStoreReducer.isLogged))
+    const isLogged = useSelector(((state) => state.onlineStoreReducer.isLogged))
 
     /**
      * If the user already logged navigate to payment gateway.
@@ -40,7 +39,7 @@ const Checkout: React.FC = () => {
         const orderId = "order" + uuidv4();
 
         const getOrderList = () => {
-            return cartedItems.map((item: ICartedItem) => {
+            return cartedItems.map((item) => {
                     return {
                         orderId: orderId,
                         productId: item.product.id,
@@ -102,7 +101,7 @@ const Checkout: React.FC = () => {
                         </thead>
                         <tbody>
                         {
-                            cartedItems.map((product: ICartedItem, index: number) =>
+                            cartedItems.map((product, index) =>
                                 <CartedItem key={index} index={index} cartedItem={product}/>
                             )}
                         </tbody>

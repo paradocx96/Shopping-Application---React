@@ -4,8 +4,8 @@ import {RootState} from "../store/reducers";
 import {setDarkTheme} from "../store/actions/CommonStoreActions";
 import DarkModeToggle from "react-dark-mode-toggle";
 
-const DarkModeToggleDiv: React.FC = () => {
-    const isDark: boolean = useSelector((state: RootState) => state.onlineStoreReducer.isDarkTheme);
+function DarkModeToggleDiv() {
+    const isDark = useSelector((state) => state.onlineStoreReducer.isDarkTheme);
     useEffect(() => {
         if (isDark) {
             document.documentElement.classList.add('dark');

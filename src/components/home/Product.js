@@ -1,24 +1,20 @@
-import React, {FormEvent, useEffect, useState} from 'react';
-import {Card, Button, Col, Row, Form} from "react-bootstrap";
+import React, {useEffect, useState} from 'react';
+import {Button, Card, Col, Form, Row} from "react-bootstrap";
 import NumberFormat from 'react-number-format';
 import {useDispatch, useSelector} from "react-redux";
-import {ICartedItem, IProduct} from "../../types/product";
 import {addToCart, changeCartedCount} from "../../store/actions/ProductActions";
 import {RootState} from "../../store/reducers";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
 AOS.init();
-type ProductProps = {
-    product: IProduct;
-}
 
-const Product: React.FC<ProductProps> = (props) => {
+function Product(props) {
     const {product} = props;
-    const cartedItems: ICartedItem[] = useSelector((state: RootState) => state.cartReducer.cartedItems);
+    const cartedItems = useSelector((state) => state.cartReducer.cartedItems);
     const cartedItem = cartedItems.find(cartedItem => cartedItem.product.title === product.title);
     const dispatch = useDispatch();
-    const [qty, setQty] = useState<number>(cartedItem === undefined ? 1 : cartedItem.cQty);
+    const [qty, setQty] = useState < number > (cartedItem === undefined ? 1 : cartedItem.cQty);
 
     useEffect(() => {
             setQty(cartedItem === undefined ? 1 : cartedItem.cQty);
@@ -29,7 +25,7 @@ const Product: React.FC<ProductProps> = (props) => {
      * Change the count of the carted item in redux store.
      * @param event
      */
-    const onHandelUpdate = (event: FormEvent) => {
+    const onHandelUpdate = (event) => {
         event.preventDefault();
         event.stopPropagation();
         dispatch(changeCartedCount({product: product, cQty: qty}))
@@ -39,7 +35,7 @@ const Product: React.FC<ProductProps> = (props) => {
      * Add product into redux store cart.
      * @param event
      */
-    const onHandelAddToCart = (event: FormEvent) => {
+    const onHandelAddToCart = (event) => {
         event.preventDefault();
         event.stopPropagation();
         dispatch(addToCart({product: product, cQty: qty}))
@@ -85,7 +81,7 @@ const Product: React.FC<ProductProps> = (props) => {
                     <Row className="m-0">
                         <Col xs={5} className="pl-0 pr-2">
                             <input type="number" className="count-field text-left pl-lg-3"
-                                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQty(Number(e.target.value))}
+                                   onChange={(e) => setQty(Number(e.target.value))}
                                    placeholder="" value={qty ? qty : ''}
                                    min="1" max={product.stockQty}/>
                         </Col>

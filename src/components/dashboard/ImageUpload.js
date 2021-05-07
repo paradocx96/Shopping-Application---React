@@ -7,20 +7,14 @@ import placeHolderImg from "../../assets/images/placehoderimg.png";
 import axios from "axios";
 
 
-type ImgCropProps = {
-    setImageUrl: (url: string) => void;
-    imageUrl: string | null
-    setIsImageUploading: (stateOfButton: boolean) => void;
-}
-
-const ImgUpload: React.FC<ImgCropProps> = (props) => {
+function ImgUpload(props) {
     const {setImageUrl, imageUrl, setIsImageUploading} = props;
-    const [src, setSrc] = useState<any>(null);
-    const [cropper, setCropper] = useState<any>();
+    const [src, setSrc] = useState(null);
+    const [cropper, setCropper] = useState();
     const [isVisible, setIsVisible] = useState(false);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState(false);
 
-    const onChange = (e: any) => {
+    const onChange = (e) => {
         setIsVisible(true);
         props.setIsImageUploading(true);
         e.preventDefault();
@@ -37,7 +31,7 @@ const ImgUpload: React.FC<ImgCropProps> = (props) => {
         reader.readAsDataURL(files[0]);
     }
 
-    const convertDataUrlToBlob = (dataUrl: string): Blob => {
+    const convertDataUrlToBlob = (dataUrl) => {
         const arr = dataUrl.split(',');
         const bstr = atob(arr[1]);
         let n = bstr.length;

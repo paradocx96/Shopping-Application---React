@@ -5,13 +5,12 @@ import CartPreviewItem from "./CartPreviewItem";
 import {useSelector} from "react-redux";
 import {RootState} from "../../store/reducers";
 import NumberFormat from "react-number-format";
-import {ICartedItem} from "../../types/product";
 
 /**
  * Cart icon popup box
  * @constructor
  */
-const CartPreview: React.FC = () => {
+function CartPreview() {
     const history = useHistory();
 
     /**
@@ -21,17 +20,17 @@ const CartPreview: React.FC = () => {
         history.push('/checkout')
     }
 
-    const [tot, setTot] = useState<number>(0)
+    const [tot, setTot] = useState(0)
     const discountPercentage = 0;
-    const cartedItems: ICartedItem[] = useSelector((state: RootState) => state.cartReducer.cartedItems)
+    const cartedItems = useSelector((state) => state.cartReducer.cartedItems)
 
     /**
      * Get the count of carted items.
      */
     const countOfCartedItem = cartedItems.length
 
-    const subtotal: number =
-        cartedItems.reduce((sum: number, cItem: ICartedItem) => sum + cItem.cQty * cItem.product.sellPrice, 0)
+    const subtotal =
+        cartedItems.reduce((sum, cItem) => sum + cItem.cQty * cItem.product.sellPrice, 0)
 
     useEffect(() => {
             setTot(subtotal);
@@ -42,7 +41,7 @@ const CartPreview: React.FC = () => {
         <div className="cart-preview">
 
             <Container className="overflow-auto ml-md-4 pr-md-4">
-                {cartedItems.map((cartedItem: ICartedItem, index: number) => (
+                {cartedItems.map((cartedItem, index) => (
                     <CartPreviewItem product={cartedItem.product} cartedQty={cartedItem.cQty} key={index}/>
                 ))}
             </Container>

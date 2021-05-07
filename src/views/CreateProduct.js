@@ -1,4 +1,4 @@
-import React, {FormEvent, useState} from 'react';
+import React, {useState} from 'react';
 import {Button, Col, Container, Form, Row, Spinner} from "react-bootstrap";
 import {useHistory} from "react-router-dom";
 import axios from "axios";
@@ -9,21 +9,21 @@ import ImgUpload from "../components/dashboard/ImageUpload";
  * Render Create product page.
  * @constructor
  */
-const CreateProduct: React.FC = () => {
-    const [validated, setValidated] = useState<boolean>(false);
-    const [title, setTitle] = useState<string | null>(null);
-    const [price, setPrice] = useState<number | null>(null);
-    const [sellPrice, setSellPrice] = useState<number | null>(null);
-    const [imageUrl, setImageUrl] = useState<string | null>(null);
-    const [categoryType, setCategoryType] = useState<string | null>(null);
-    const [stockQty, setStockQty] = useState<number | null>(null);
-    const [isCreatingProduct, setIsCreatingProduct] = useState<boolean>(false);
-    const [isUploadingImage, setIsUploadingImage] = useState<boolean>(false);
-    const categories: string[] = ["Grocery", "Fruits", "Veggies", "Bakery", "Electronics"];
+function CreateProduct() {
+    const [validated, setValidated] = useState(false);
+    const [title, setTitle] = useState(null);
+    const [price, setPrice] = useState(null);
+    const [sellPrice, setSellPrice] = useState(null);
+    const [imageUrl, setImageUrl] = useState(null);
+    const [categoryType, setCategoryType] = useState(null);
+    const [stockQty, setStockQty] = useState(null);
+    const [isCreatingProduct, setIsCreatingProduct] = useState(false);
+    const [isUploadingImage, setIsUploadingImage] = useState(false);
+    const categories = ["Grocery", "Fruits", "Veggies", "Bakery", "Electronics"];
     const history = useHistory();
     const onHandleBackToDashboard = () => history.push('/dashboard');
 
-    const handleOnSubmit = (event: FormEvent) => {
+    const handleOnSubmit = (event) => {
         try {
             event.preventDefault();
             event.stopPropagation();
@@ -114,7 +114,7 @@ const CreateProduct: React.FC = () => {
                                     <Form.Label>Product Type</Form.Label>
                                     <Form.Control as="select" defaultValue="Choose..."
                                                   onChange={(e) => setCategoryType(e.target.value)}>
-                                        {categories.map((val: string) => <option>{val}</option>)}
+                                        {categories.map((val) => <option>{val}</option>)}
                                     </Form.Control>
                                 </Form.Group>
 

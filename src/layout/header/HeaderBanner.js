@@ -1,16 +1,15 @@
 import React from 'react';
-import {Row, Col, Button, OverlayTrigger, Popover} from 'react-bootstrap';
-import {useHistory, Link} from 'react-router-dom'
+import {Button, Col, OverlayTrigger, Popover, Row} from 'react-bootstrap';
+import {Link, useHistory} from 'react-router-dom'
 import CartPreview from "./CartPreview";
 import {useSelector} from "react-redux";
-import {RootState} from "../../store/reducers";
-import {ICartedItem} from "../../types/product";
+
 
 /**
  * Header bottom part.
  * @constructor
  */
-const HeaderBanner: React.FC = () => {
+function HeaderBanner() {
     const history = useHistory();
 
     /**
@@ -20,7 +19,7 @@ const HeaderBanner: React.FC = () => {
         history.push('/checkout')
     }
 
-    const cartedItems: ICartedItem[] = useSelector((state: RootState) => state.cartReducer.cartedItems);
+    const cartedItems = useSelector((state) => state.cartReducer.cartedItems);
 
     /**
      * Get the count of carted items.

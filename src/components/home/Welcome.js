@@ -7,7 +7,7 @@ import Banner1s from "../../assets/images/banners/banner-s.jpg";
 import Banner2s from "../../assets/images/banners/banner-s2.jpg";
 import Banner3s from "../../assets/images/banners/banner-s3.jpg";
 
-const Welcome: React.FC = () => {
+function Welcome() {
     return (
         <div className="m-0 p-0">
             <Carousel>

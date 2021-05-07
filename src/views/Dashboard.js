@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {IProduct} from "../types/product";
 import {Button, Container, Table} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../store/reducers";
 import DashboardItem from "../components/dashboard/DashboardItem";
 import {useHistory} from "react-router-dom";
 import axios from "axios";
@@ -12,8 +10,8 @@ import {addAllProductsFromDb} from "../store/actions/ProductActions";
  * Show all product list for admin.
  * @constructor
  */
-const DashBoard: React.FC = () => {
-    const products: IProduct[] = useSelector((state: RootState) => state.onlineStoreReducer.products);
+function DashBoard() {
+    const products = useSelector((state) => state.onlineStoreReducer.products);
     const history = useHistory();
     const onHandelCreateProduct = () => history.push('/create-product');
     const dispatch = useDispatch();
@@ -54,7 +52,7 @@ const DashBoard: React.FC = () => {
                     </thead>
                     <tbody>
                     {
-                        products.map((product: IProduct, index: number) =>
+                        products.map((product, index) =>
                             <DashboardItem key={index} index={index} product={product}
                                            isDisableButtons={isDisableButtons}
                                            setIsDisableButtons={setIsDisableButtons}/>)

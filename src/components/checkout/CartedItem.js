@@ -2,18 +2,13 @@ import React, {useEffect, useState} from 'react';
 import NumberFormat from "react-number-format";
 import {Image} from "react-bootstrap";
 import {useDispatch} from "react-redux";
-import {ICartedItem} from "../../types/product";
 import {changeCartedCount, removeFromCart} from "../../store/actions/ProductActions";
 
-type CartedItemProps = {
-    index: number;
-    cartedItem: ICartedItem;
-}
 
-const CartedItem: React.FC<CartedItemProps> = (props) => {
+function CartedItem(props) {
     const {index, cartedItem} = props;
-    const [qty, setQty] = useState<number>(cartedItem.cQty);
-    let quantity: number;
+    const [qty, setQty] = useState(cartedItem.cQty);
+    let quantity;
     const dispatch = useDispatch();
 
     /**
@@ -41,7 +36,7 @@ const CartedItem: React.FC<CartedItemProps> = (props) => {
      * Change the carted quantity in redux store.
      * @param quantity
      */
-    const changeCartedCountOfProduct = (quantity: number) => {
+    const changeCartedCountOfProduct = (quantity) => {
         dispatch(changeCartedCount({product: cartedItem.product, cQty: quantity}))
     }
 

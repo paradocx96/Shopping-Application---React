@@ -1,14 +1,13 @@
-import React, {FormEvent, useState} from 'react';
-import {Col, Container, FormControl, Form, Row} from "react-bootstrap";
+import React, {useState} from 'react';
+import {Col, Container, Form, FormControl, Row} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {searchProduct} from "../../store/actions/ProductActions";
 import Product from "./Product";
 import {RootState} from "../../store/reducers";
-import {IProduct} from "../../types/product";
 
-const SearchBar: React.FC = () => {
-    const {products, searchTerm} = useSelector((state: RootState) => state.onlineStoreReducer);
-    const [search, setSearch] = useState<string>('');
+function SearchBar() {
+    const {products, searchTerm} = useSelector((state) => state.onlineStoreReducer);
+    const [search, setSearch] = useState('');
 
     const dispatch = useDispatch();
 
@@ -16,7 +15,7 @@ const SearchBar: React.FC = () => {
      * Search the product by product name
      * @param event
      */
-    const handleOnSubmit = (event: FormEvent) => {
+    const handleOnSubmit = (event) => {
         event.preventDefault();
         event.stopPropagation();
         dispatch(searchProduct(search));
@@ -26,7 +25,7 @@ const SearchBar: React.FC = () => {
      * Set the user entered text into search term
      * @param e
      */
-    const onChangeSearchTerm = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChangeSearchTerm = (e) => {
         setSearch(e.target.value);
         dispatch(searchProduct(''));
     }
@@ -36,7 +35,7 @@ const SearchBar: React.FC = () => {
      */
     const renderSearchProducts = () => {
         return (
-            products.map((product: IProduct, index: number) =>
+            products.map((product, index) =>
                 (product.title.toLowerCase() === searchTerm.toLowerCase()) && <Product key={index} product={product}/>)
         );
     }
