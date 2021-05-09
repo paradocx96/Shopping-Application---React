@@ -113,7 +113,7 @@ function DashboardItem(props) {
                  */
                 setIsDisableButtons(true);
                 setIsDeleting(true);
-                axios.get(process.env.REACT_APP_BACKEND_STARTING_URL + 'delete-product/' + product.id)
+                axios.delete(process.env.REACT_APP_BACKEND_STARTING_URL + 'delete-product/' + product.id)
                     .then(function (response) {
                         console.log(response);
                     })
