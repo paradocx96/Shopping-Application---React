@@ -12,6 +12,8 @@ class DeliveryGateway extends React.Component {
         this.state = this.initialState;
         this.calculateAddress = this.calculateAddress.bind(this);
         this.submitAddress = this.submitAddress.bind(this);
+        this.getOrderDetails = this.getOrderDetails.bind(this);
+        this.postTotalOrderPrice = this.postTotalOrderPrice.bind(this);
         this.resetForm = this.resetForm.bind(this);
 
         this.assignAddressHandler = this.assignAddressHandler.bind();
@@ -24,11 +26,11 @@ class DeliveryGateway extends React.Component {
     }
 
     initialState = {
-        orderCost: 1000.00,
+        orderCost: 100.00,
         deliveryCost: 0.00,
         totalCost: 0.00,
 
-        userid: '',
+        userid: '1',
         title: '',
         addresss: '',
         province: '',
@@ -73,14 +75,15 @@ class DeliveryGateway extends React.Component {
         this.setState(() => this.initialState)
     }
 
-    calculateAddress = (e) => {
-        e.preventDefault();
+    // Getting calculated delivery cost
+    calculateAddress = (event) => {
+        event.preventDefault();
 
         if (this.state.title == null && this.state.addresss == null) {
             alert("Fill All Data!!!");
         } else {
             let formAddress = {
-                userid: '1',
+                userid: this.state.userid,
                 title: this.state.title,
                 addresss: this.state.addresss,
                 province: this.state.province,
@@ -103,6 +106,7 @@ class DeliveryGateway extends React.Component {
         }
     }
 
+    // Show Address
     addressShowHandler() {
         this.setState({
             title2: this.state.title,
@@ -115,6 +119,7 @@ class DeliveryGateway extends React.Component {
         })
     }
 
+    // Implementation of Pay Button
     submitAddress = (event) => {
         event.preventDefault();
 
@@ -122,7 +127,7 @@ class DeliveryGateway extends React.Component {
             alert("Fill All Data!!!");
         } else {
             let newAddress = {
-                userid: '1',
+                userid: this.state.userid,
                 title: this.state.title,
                 addresss: this.state.addresss,
                 province: this.state.province,
@@ -132,28 +137,37 @@ class DeliveryGateway extends React.Component {
                 phone: this.state.phone
             }
 
-            let totPrice = {
-                price: this.state.totalCost
-            }
-
-            // Send total Price to Payment Gateway
+            // Save new address in database
             AddressService.postAddress(newAddress)
                 .catch(function (error) {
                     console.log(error);
                 }).then(() => {
                 console.log('NEW ADDRESS ADDED TO DATABASE!');
                 console.log('Address => ' + JSON.stringify(newAddress));
-            });
-
-            // Save address in database
-            AddressService.postTotalPrice(totPrice)
-                .catch(function (error) {
-                    console.log(error);
-                }).then(() => {
-                console.log('TOTAL PRICE SENDS TO PAYMENT GATEWAY! \n' + JSON.stringify(totPrice));
-                this.props.history.push('/payment');
+                this.postTotalOrderPrice();
             });
         }
+    }
+
+    // Send total Price to Payment Gateway
+    postTotalOrderPrice() {
+
+        let totalPrice = {
+            price: this.state.totalCost
+        }
+
+        AddressService.postTotalPrice(totalPrice)
+            .catch(function (error) {
+                console.log(error);
+            }).then(() => {
+            console.log('TOTAL PRICE SENDS TO PAYMENT GATEWAY! \n' + JSON.stringify(totalPrice));
+            this.props.history.push('/payment');
+        });
+    }
+
+    // Getting Order details from Shopping cart
+    getOrderDetails(event) {
+
     }
 
     componentDidMount() {
@@ -164,16 +178,15 @@ class DeliveryGateway extends React.Component {
             <div className={'container'}>
                 <Card>
                     <Card.Body>
-                        <h1 className={'card-header text-center'}>Delivery Service</h1>
+                        <h1 className={'card-header text-center p-3 mb-2 bg-primary text-white'}>E-Shop Delivery Service</h1>
                         <br/>
-                        <h4>Enter a Address</h4>
+                        <h4 className={'font-weight-bold'}>Enter a Address</h4>
                         <Form id={'addAddressForm'}
                               onSubmit={this.calculateAddress.bind(this)}
                               onReset={this.resetForm.bind(this)}>
 
                             <Form.Row>
                                 <Form.Group as={Col} controlId="FormAddress">
-                                    <Form.Label>Address</Form.Label>
                                     <Form.Control required as="textarea"
                                                   placeholder={'Address Here...'}
                                                   rows={3}
@@ -185,7 +198,7 @@ class DeliveryGateway extends React.Component {
 
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formTitle">
-                                    <Form.Label>Delivery Destination</Form.Label>
+                                    <Form.Label className={'font-weight-bold'}>Delivery Destination</Form.Label>
                                     <Form.Control required as="select"
                                                   name={'title'}
                                                   value={this.state.title}
@@ -198,7 +211,7 @@ class DeliveryGateway extends React.Component {
                                 </Form.Group>
 
                                 <Form.Group as={Col} controlId="formProvince">
-                                    <Form.Label>Province</Form.Label>
+                                    <Form.Label className={'font-weight-bold'}>Province</Form.Label>
                                     <Form.Control required as="select"
                                                   name={'province'}
                                                   value={this.state.province}
@@ -217,7 +230,7 @@ class DeliveryGateway extends React.Component {
                                 </Form.Group>
 
                                 <Form.Group as={Col} controlId="formDistrict">
-                                    <Form.Label>District</Form.Label>
+                                    <Form.Label className={'font-weight-bold'}>District</Form.Label>
                                     <Form.Control required as="select"
                                                   name={'district'}
                                                   value={this.state.district}
@@ -253,21 +266,21 @@ class DeliveryGateway extends React.Component {
 
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formCity">
-                                    <Form.Label>City</Form.Label>
+                                    <Form.Label className={'font-weight-bold'}>City</Form.Label>
                                     <Form.Control required name={'city'}
                                                   value={this.state.city}
                                                   onChange={this.assignCityHandler}/>
                                 </Form.Group>
 
                                 <Form.Group as={Col} controlId="formZip">
-                                    <Form.Label>Postcode</Form.Label>
+                                    <Form.Label className={'font-weight-bold'}>Postcode</Form.Label>
                                     <Form.Control required name={'zip'}
                                                   value={this.state.zip}
                                                   onChange={this.assignZipHandler}/>
                                 </Form.Group>
 
                                 <Form.Group as={Col} controlId="formPhone">
-                                    <Form.Label>Phone No</Form.Label>
+                                    <Form.Label className={'font-weight-bold'}>Phone No</Form.Label>
                                     <Form.Control required name={'phone'}
                                                   value={this.state.phone}
                                                   onChange={this.assignPhoneHandler}/>
@@ -275,8 +288,8 @@ class DeliveryGateway extends React.Component {
                             </Form.Row>
 
                             <div>
-                                <Button type={'submit'} className={'btn btn-primary'}>Add</Button>{'\u00A0'}
-                                <Button type={'reset'} className={'btn btn-warning'}>Reset</Button>{'\u00A0'}
+                                <Button type={'submit'} className={'btn btn-primary btn-lg'}>Add</Button>{'\u00A0'}
+                                <Button type={'reset'} className={'btn btn-warning btn-lg'}>Reset</Button>{'\u00A0'}
                             </div>
                         </Form>
 
@@ -305,20 +318,20 @@ class DeliveryGateway extends React.Component {
                             <Table striped bordered hover>
                                 <tbody>
                                 <tr>
-                                    <td><Form.Label>Order Price</Form.Label></td>
-                                    <td>{this.state.orderCost}</td>
+                                    <td><Form.Label className={'font-weight-bold'}>Order Price</Form.Label></td>
+                                    <td>{this.state.orderCost + '.00'}</td>
                                 </tr>
                                 <tr>
-                                    <td><Form.Label>Delivery Price</Form.Label></td>
-                                    <td>{this.state.deliveryCost}</td>
+                                    <td><Form.Label className={'font-weight-bold'}>Delivery Price</Form.Label></td>
+                                    <td>{this.state.deliveryCost + '.00'}</td>
                                 </tr>
                                 <tr>
-                                    <td><Form.Label>Total Price</Form.Label></td>
-                                    <td>{this.state.totalCost}</td>
+                                    <td><Form.Label className={'font-weight-bold'}>Total Price</Form.Label></td>
+                                    <td>{this.state.totalCost + '.00'}</td>
                                 </tr>
                                 </tbody>
                             </Table>
-                            <Button type={'submit'} className="btn btn-warning">Pay Here</Button>
+                            <Button type={'submit'} className="btn btn-warning btn-lg">Pay Here</Button>
                         </Form>
                     </Card.Footer>
                 </Card>
