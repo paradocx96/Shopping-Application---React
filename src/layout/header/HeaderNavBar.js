@@ -29,6 +29,7 @@ function HeaderNavBar() {
                             className="feather-phone-call"/>
                             {CONTACT_NUMBER}</a>
                         <Link className="login px-2 negation" to="/login">Login</Link>
+                        <Link className="login px-2 negation" to="/sign-up">Sign up</Link>
                         <p className='text-center'>
                             <DarkModeToggleDiv/>
                         </p>
