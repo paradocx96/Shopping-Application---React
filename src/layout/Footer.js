@@ -16,7 +16,7 @@ function Footer() {
                 <Col  xs={12} sm={12} className="link-area pb-1">
                     <Link to="/" className="pr-2 px-md-4">Home</Link>
                     <Link to="/checkout" className="px-2 px-md-4">Checkout</Link>
-                    <Link to="/seller" className="px-2 px-md-4">Seller</Link>
+                    <Link to="/dashboard" className="px-2 px-md-4">Seller</Link>
                     <br/>
 
                     <div className='line-divider my-1'/>
