@@ -1,0 +1,8 @@
+export const ADD_PRODUCT = 'ADD_PRODUCT';
+export const ADD_ALL_PRODUCTS_FROM_DB = 'ADD_ALL_PRODUCTS_FROM_DB';
+export const ADD_TO_CART = 'ADD_TO_CART';
+export const CHANGE_CARTED_COUNT = 'CHANGE_CARTED_COUNT';
+export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
+export const FLUSH_CART = 'FLUSH_CART';
+export const SEARCH_PRODUCT = 'SEARCH_PRODUCT';
+export const SET_DARK_MODE = 'SET_DARK_MODE';
