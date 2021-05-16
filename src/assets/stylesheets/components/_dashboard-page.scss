@@ -1,0 +1,12 @@
+@import "../common/colors";
+
+.dashboard-page {
+  min-height: 100vh;
+  color: var(--text-primary-color);
+
+  .table-data{
+    th{
+      color: var(--text-primary-color);
+    }
+  }
+}
