@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Link, useHistory }from 'react-router-dom';
+import { useHistory }from 'react-router-dom';
 import {Button, Col, Container, Row, Spinner, Table} from "react-bootstrap";
 import NumberFormat from "react-number-format";
 import {useDispatch} from "react-redux";
@@ -8,6 +8,7 @@ import {v4 as uuidv4} from 'uuid';
 import axios from "axios";
 import {flushCart} from "../store/actions/ProductActions";
 import {configureStore} from "../store";
+import AddressService from "../components/delivery/AddressService";
 
 /**
  * Render checkout page.
@@ -59,7 +60,8 @@ function Checkout() {
             price: tot,
             status: 'A'
         }
-        axios.post('http://localhost:8280/delivery/add',postman)
+
+        AddressService.postCheckoutOrder(postman)
             .catch(function (error) {
             /* handle error.In this, just show the error */
             console.log(error);
