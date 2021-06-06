@@ -1,0 +1,62 @@
+@import "../common/colors";
+
+.checkout-page {
+  font-size: 1em;
+  min-height: 100vh;
+  background-color: var(--background-primary-color);
+  color: var(--text-primary-color);
+
+  .checkout-page-title {
+    font-size: 1.5em;
+    font-weight: 500;
+  }
+
+  .table-div {
+    font-size: 0.9em;
+    border: 2px solid var(--border-primary-color);
+    border-radius: 10px;
+
+    .shopping-cart {
+      font-size: 1.2em;
+      font-weight: 500;
+    }
+
+    table {
+      border-top-style: hidden;
+    }
+
+    th {
+      color: var(--text-primary-color);
+    }
+
+    .calculation-area {
+      font-size: 1.15em;
+      font-weight: 600;
+      color: var(--text-primary-color);
+    }
+
+    .question {
+      font-size: 0.8em;
+      font-weight: 500;
+      color: var(--text-primary-color);
+    }
+
+    .input {
+      width: 100%;
+      background-color: transparent;
+    }
+
+    .total {
+      color: red;
+      font-weight: 600;
+    }
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .checkout-page {
+    font-size: 0.8em;
+  }
+}
+
+

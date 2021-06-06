@@ -1,0 +1,44 @@
+@import "../common/colors";
+.search-bar-div{
+  //background-color: var(--background-primary-color);
+}
+.search-bar{
+  font-size: 1em;
+  border: 2px solid var(--button-primary-bg-color);
+  border-radius: 20px;
+  background: rgba( var(--background-primary-color), 0.8);
+
+  .search-bar-box {
+    font-size: 1.2em;
+    font-weight: 500;
+    color: var(--text-primary-color);
+    background-color:  transparent;
+    border: none;
+    &:focus{
+      box-shadow: none;
+      background-color: transparent;
+      color: var(--text-secondary-color);
+    }
+    &::placeholder{
+      color: var(--text-secondary-color);
+    }
+  }
+
+  i{
+    font-size: 1.4em;
+    cursor: pointer;
+    color: var(--text-secondary-color);
+  }
+}
+
+@media only screen and (max-width: 992px)  and (min-width: 400px) {
+  .search-bar {
+    font-size: 0.7em;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .search-bar {
+    font-size: 0.5em;
+  }
+}

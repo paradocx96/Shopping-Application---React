@@ -1,0 +1,62 @@
+@import "../common/colors";
+
+//Top of the header - above the vertical line
+.header-nav-bar {
+  font-size: 1em;
+  color: var(--text-primary-color);
+  background:var(--background-secondary-color);
+  text-align: right;
+  border-bottom: 1.3px solid var(--border-primary-color);
+
+  .basic-navbar-nav {
+    font-size: 0.5em;
+    color:var(--text-primary-color) !important;
+    background-color: #8e8eb3;
+  }
+
+
+  a {
+    font-size: 0.9em;
+    font-weight: 500;
+    text-align: center;
+    outline: none;
+    color: var(--link-text-color);
+    &:hover{
+      color: var(--link-text--hover-color);
+    }
+  }
+
+  .feather-phone-call {
+    padding-right: 3px;
+    color: var(--link-text-color);
+    &:hover{
+      color: var(--link-text--hover-color);
+    }
+  }
+
+  .mobile-view-nav-brand {
+    font-size: 0.7em;
+  }
+
+  .delivery-area {
+    color: var(--link-text-color);
+    &:hover{
+      color: var(--link-text--hover-color);
+    }
+  }
+
+  .tel-link {
+    color: var(--link-text-color);
+    &:hover{
+      color: var(--link-text--hover-color);
+    }
+  }
+
+  .login {
+    color: var(--link-text-color);
+    &:hover{
+      color: var(--link-text--hover-color);
+    }
+  }
+}
+

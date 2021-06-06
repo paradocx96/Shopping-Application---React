@@ -1,0 +1,26 @@
+@import "../common/colors";
+
+.new-product-dev {
+
+  min-height: 100vh;
+  background-color: var(--background-primary-color);
+  color: var(--text-primary-color);
+
+  .create-product {
+    margin: auto;
+    max-width: 500px;
+
+    .image-preview {
+      max-width: 200px;
+    }
+  }
+
+  .back-to-dashboard {
+    font-size: 0.9em;
+    font-weight: 700;
+    color: var(--text-primary-color);
+    background-color: var(--background-primary-color);
+    border-radius: 10px;
+  }
+
+}
